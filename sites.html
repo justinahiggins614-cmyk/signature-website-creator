@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Signature Website Creator — My Websites</title>
+<meta name="description" content="Every website you've built with the Creator, saved on your device. Preview, download, edit, delete.">
+<style>
+:root{--bg:#0a0f1e;--panel:#111a2e;--panel2:#0d1425;--gold:#d4a017;--gold2:#f0c64a;--cyan:#59d6ff;--txt:#e8ecf4;--dim:#9aa4b2;--line:#24304d;--grn:#5fd97a;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.hero{text-align:center;padding:22px 14px 10px}
+.hero h1{margin:.2em 0 .1em;font-size:1.8em;color:var(--gold2)}
+.kicker{color:var(--gold);letter-spacing:.28em;font-size:.78em;margin:0}
+.jah-tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--panel2);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:50}
+.jah-tabs a.tablink{flex:0 0 auto;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:9px 14px;font-size:.92em;text-decoration:none;white-space:nowrap}
+.jah-tabs a.tablink.on{background:var(--gold);color:#241a02;font-weight:700;border-color:var(--gold)}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}
+.sec h2{margin-top:0;color:var(--gold2)}
+.btn{display:inline-block;background:var(--gold);color:#241a02;font-weight:700;border:0;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer;margin:6px 8px 6px 0;text-decoration:none}
+.btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn.danger{background:#3a1414;color:#ffb3b3;border:1px solid var(--red)}
+.btn:active{transform:scale(.97)}
+.dim{color:var(--dim);font-size:.92em}
+details.best{border:2px solid var(--gold);border-radius:10px;padding:14px;margin:14px 0;background:#141021}
+details.best summary{cursor:pointer;font-size:1.15em;font-weight:700;color:var(--gold2)}
+details.az{border:1px solid var(--line);border-radius:8px;margin:6px 0;background:var(--panel2)}
+details.az summary{cursor:pointer;padding:10px 12px;font-weight:700}
+.site{border:1px solid var(--line);border-radius:8px;padding:12px;margin:10px 0;background:var(--panel2)}
+.site h3{margin:.2em 0;color:var(--cyan)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.tag{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.82em;color:var(--dim)}
+.modal{position:fixed;inset:0;background:#000c;display:none;z-index:100;align-items:center;justify-content:center;padding:12px}
+.modal.open{display:flex}
+.mbox{background:var(--panel);border:2px solid var(--gold);border-radius:12px;width:min(900px,96vw);height:86vh;display:flex;flex-direction:column;overflow:hidden}
+.mbox header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.mbox iframe{flex:1;border:0;background:#fff}
+.jahnet{background:#070b16;color:#9aa4b2;font-size:.78em;padding:14px 10px;text-align:center;line-height:2.1}
+.jahnet .t{color:var(--gold);font-weight:700;letter-spacing:.25em;margin-right:10px}
+.jahnet a{color:#9fc2ff;text-decoration:none;margin:0 7px;white-space:nowrap}
+.jahnet .here{color:var(--gold);font-weight:700;margin:0 7px}
+footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
+.empty{text-align:center;padding:30px 10px}
+</style>
+</head>
+<body>
+<div class="hero">
+  <p class="kicker">SITE 31 OF 31 &middot; THE JAH NETWORK</p>
+  <h1>&#128449; My Websites</h1>
+  <p class="dim">Every site you've built lives here, on your device. Nothing leaves your browser.</p>
+</div>
+
+<nav class="jah-tabs" aria-label="Site pages">
+  <a class="tablink" href="index.html">&#127968; Main</a>
+  <a class="tablink" href="builder.html">&#128736;&#65039; Builder</a>
+  <a class="tablink" href="mirror.html">&#12978; Mirror</a>
+  <a class="tablink" href="guide.html">&#128214; Guide</a>
+  <a class="tablink on" href="sites.html" aria-current="page">&#128449; My Websites</a>
+  <a class="tablink" href="options.html">&#127912; 1M Options</a>
+</nav>
+
+<div class="wrap">
+  <div class="sec">
+    <p class="dim" style="margin:0">Sites are saved in this browser's local storage when you <b>Lock In</b> a build. Download the files to put a site online anywhere.</p>
+    <p><a class="btn" href="builder.html">Build a new site</a> <a class="btn ghost" href="mirror.html">&#12978; Mirror a site</a></p>
+  </div>
+  <div id="archive"></div>
+</div>
+
+<div class="modal" id="pvModal" role="dialog" aria-modal="true" aria-label="Site preview">
+  <div class="mbox">
+    <header><b id="pvTitle">Preview</b><button class="btn ghost" id="pvClose">Close</button></header>
+    <iframe id="pvFrame" title="Site preview" sandbox="allow-scripts"></iframe>
+  </div>
+</div>
+
+<div class="jahnet"><span class="t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-comics/">12 The Signature Comic Store</a><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a><a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI Robot Matcher</a><a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a><a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">26 The Signature Cyber Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">27 The Signature 3D Print Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-earth/">28 Signature Earth</a><a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">29 The Signature Flight School</a><a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">30 The Signature Game Store</a><span class="here">31 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
+<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+
+<script>
+(function(){
+'use strict';
+function el(id){ return document.getElementById(id); }
+function escH(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function load(){ try{ return JSON.parse(localStorage.getItem('swc-sites-v1')||'[]'); }catch(e){ return []; } }
+function save(a){ try{ localStorage.setItem('swc-sites-v1', JSON.stringify(a)); }catch(e){ alert('Storage is full \u2014 delete an old site first.'); } }
+function fmtDate(ts){ try{ return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }catch(e){ return ''; } }
+
+var sites = load();
+
+function siteCard(s){
+  var type = s.mirror ? '&#12978; Mirror page' : '&#128736;&#65039; Builder site';
+  var extra = s.mirror && s.source ? ' &middot; layout inspired by '+escH(s.source) : '';
+  var files = Object.keys(s.files||{});
+  return '<div class="site"><h3>'+escH(s.name)+'</h3>' +
+    '<div class="meta"><span class="tag">'+type+'</span>' +
+    (s.smartLabel?'<span class="tag">'+escH(s.smartLabel)+'</span>':'') +
+    '<span class="tag">'+fmtDate(s.ts)+'</span>' +
+    (s.hasStore?'<span class="tag">store</span>':'')+'</div>' +
+    (s.picks&&s.picks.length?'<p class="dim">Built with: '+escH(s.picks.slice(0,6).join(', '))+(s.picks.length>6?'\u2026':'')+'</p>':'') +
+    '<div>' +
+    '<button class="btn ghost" data-act="preview" data-id="'+s.id+'">Preview</button>' +
+    '<button class="btn ghost" data-act="edit" data-id="'+s.id+'">Edit</button>' +
+    '<button class="btn ghost" data-act="dl" data-id="'+s.id+'">Download files ('+files.length+')</button>' +
+    '<button class="btn danger" data-act="del" data-id="'+s.id+'">Delete</button>' +
+    '</div></div>';
+}
+
+function render(){
+  sites = load();
+  var box = el('archive');
+  if(!sites.length){
+    box.innerHTML = '<div class="sec empty"><h2>No websites yet</h2>' +
+      '<p class="dim">Build your first site and it will appear here.</p>' +
+      '<a class="btn" href="builder.html">Open the Builder</a></div>';
+    return;
+  }
+  var best = sites[0];
+  var rest = sites.slice(1);
+  var html = '<details class="best" open><summary>\u2605 Latest build: '+escH(best.name)+'</summary>' +
+    siteCard(best) + '</details>';
+  if(rest.length){
+    var letters = {};
+    rest.forEach(function(s){
+      var L = (s.name.charAt(0)||'#').toUpperCase();
+      if(!/[A-Z]/.test(L)) L = '#';
+      (letters[L] = letters[L]||[]).push(s);
+    });
+    html += '<h2 style="color:var(--gold2)">All websites A\u2013Z ('+rest.length+')</h2>';
+    Object.keys(letters).sort().forEach(function(L){
+      html += '<details class="az"><summary>'+escH(L)+' ('+letters[L].length+')</summary><div style="padding:0 10px 10px">' +
+        letters[L].map(siteCard).join('') + '</div></details>';
+    });
+  }
+  box.innerHTML = html;
+}
+
+function find(id){ return load().find(function(s){ return s.id === id; }); }
+
+el('archive').addEventListener('click', function(e){
+  var b = e.target.closest('[data-act]'); if(!b) return;
+  var s = find(b.getAttribute('data-id')); if(!s) return;
+  var act = b.getAttribute('data-act');
+  if(act === 'preview'){
+    el('pvTitle').textContent = s.name;
+    el('pvFrame').srcdoc = s.files['index.html'] || '';
+    el('pvModal').classList.add('open');
+  }else if(act === 'del'){
+    if(confirm('Delete "'+s.name+'"? This cannot be undone.')){
+      save(load().filter(function(x){ return x.id !== s.id; }));
+      render();
+    }
+  }else if(act === 'dl'){
+    var files = Object.keys(s.files||{});
+    files.forEach(function(f, i){
+      setTimeout(function(){
+        var blob = new Blob([s.files[f]], {type:'text/html'});
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob); a.download = f;
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+      }, i*500);
+    });
+  }else if(act === 'edit'){
+    if(s.mirror){
+      try{ sessionStorage.setItem('swc-remirror', JSON.stringify(s.mirrorOpts||null)); }catch(e){}
+      location.href = 'mirror.html';
+    }else{
+      try{ sessionStorage.setItem('swc-reedit', JSON.stringify(s.opts||null)); }catch(e){}
+      location.href = 'builder.html';
+    }
+  }
+});
+el('pvClose').onclick = function(){ el('pvModal').classList.remove('open'); el('pvFrame').srcdoc=''; };
+el('pvModal').addEventListener('click', function(e){ if(e.target === el('pvModal')) el('pvClose').onclick(); });
+
+render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Signature Website Creator — 1 Million Website Options</title>
+<meta name="description" content="One million website templates, designs and styles. Browse A-Z, preview any of them, and build your site from it.">
+<style>
+:root{--bg:#0a0f1e;--panel:#111a2e;--panel2:#0d1425;--gold:#d4a017;--gold2:#f0c64a;--cyan:#59d6ff;--txt:#e8ecf4;--dim:#9aa4b2;--line:#24304d;--grn:#5fd97a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.hero{text-align:center;padding:22px 14px 10px}
+.hero h1{margin:.2em 0 .1em;font-size:1.8em;color:var(--gold2)}
+.kicker{color:var(--gold);letter-spacing:.28em;font-size:.78em;margin:0}
+.jah-tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--panel2);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:50}
+.jah-tabs a.tablink{flex:0 0 auto;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:9px 14px;font-size:.92em;text-decoration:none;white-space:nowrap}
+.jah-tabs a.tablink.on{background:var(--gold);color:#241a02;font-weight:700;border-color:var(--gold)}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}
+.sec h2{margin-top:0;color:var(--gold2)}
+.btn{display:inline-block;background:var(--gold);color:#241a02;font-weight:700;border:0;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer;margin:6px 8px 6px 0;text-decoration:none}
+.btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn.big{font-size:1.15em;padding:12px 30px}
+.btn:active{transform:scale(.97)}
+.dim{color:var(--dim);font-size:.92em}
+input.txt{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font-size:1em}
+details.best{border:2px solid var(--gold);border-radius:10px;padding:14px;margin:14px 0;background:#141021}
+details.best summary{cursor:pointer;font-size:1.15em;font-weight:700;color:var(--gold2)}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:.88em}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.toolbar input{flex:1;min-width:200px}
+.letters{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.letters button{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:.9em}
+.letters button.sel{background:var(--gold);color:#241a02;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
+.card h3{margin:.4em 0 .1em;color:var(--cyan);font-size:1.02em}
+.card .code{font-size:.75em;color:var(--dim)}
+.modal{position:fixed;inset:0;background:#000c;display:none;z-index:100;align-items:center;justify-content:center;padding:12px}
+.modal.open{display:flex}
+.mbox{background:var(--panel);border:2px solid var(--gold);border-radius:12px;width:min(640px,96vw);max-height:88vh;overflow:auto;padding:18px}
+.counter{font-size:1.1em;color:var(--gold2);font-weight:700}
+.jahnet{background:#070b16;color:#9aa4b2;font-size:.78em;padding:14px 10px;text-align:center;line-height:2.1}
+.jahnet .t{color:var(--gold);font-weight:700;letter-spacing:.25em;margin-right:10px}
+.jahnet a{color:#9fc2ff;text-decoration:none;margin:0 7px;white-space:nowrap}
+.jahnet .here{color:var(--gold);font-weight:700;margin:0 7px}
+footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
+</style>
+</head>
+<body>
+<div class="hero">
+  <p class="kicker">SITE 31 OF 31 &middot; THE JAH NETWORK</p>
+  <h1>&#127912; 1 Million Website Options</h1>
+  <p class="dim">One million website templates, designs, and styles &mdash; marching to 1,000,000. Preview any of them, then build your site from it.</p>
+  <p class="counter" id="counter">Loading&hellip;</p>
+</div>
+
+<nav class="jah-tabs" aria-label="Site pages">
+  <a class="tablink" href="index.html">&#127968; Main</a>
+  <a class="tablink" href="builder.html">&#128736;&#65039; Builder</a>
+  <a class="tablink" href="mirror.html">&#12978; Mirror</a>
+  <a class="tablink" href="guide.html">&#128214; Guide</a>
+  <a class="tablink" href="sites.html">&#128449; My Websites</a>
+  <a class="tablink on" href="options.html" aria-current="page">&#127912; 1M Options</a>
+</nav>
+
+<div class="wrap">
+  <details class="best" open id="bestBox">
+    <summary>\u2605 Best of the Best</summary>
+    <div id="bestBody"></div>
+  </details>
+
+  <div class="sec">
+    <h2>Browse the catalog</h2>
+    <div class="toolbar">
+      <input class="txt" id="q" placeholder="Search templates\u2026 (e.g. bakery, dark, portfolio)" aria-label="Search templates">
+      <button class="btn" id="qgo">Search</button>
+      <button class="btn ghost" id="qclear">Show all</button>
+    </div>
+    <div class="letters" id="letters" aria-label="Filter by letter"></div>
+    <p class="dim" id="scanNote"></p>
+    <div class="cards" id="cards"></div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn big" id="moreBtn">Load more</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="pvModal" role="dialog" aria-modal="true" aria-label="Template preview">
+  <div class="mbox">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2 id="pvTitle" style="color:var(--gold2);margin:0">Template</h2>
+      <button class="btn ghost" id="pvClose">Close</button>
+    </div>
+    <div id="pvBody"></div>
+  </div>
+</div>
+
+<div class="jahnet"><span class="t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-comics/">12 The Signature Comic Store</a><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a><a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI Robot Matcher</a><a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a><a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">26 The Signature Cyber Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">27 The Signature 3D Print Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-earth/">28 Signature Earth</a><a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">29 The Signature Flight School</a><a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">30 The Signature Game Store</a><span class="here">31 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
+<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+
+<script src="js/builder.js"></script>
+<script src="js/builder4.js"></script>
+<script>
+(function(){
+'use strict';
+var SF = window.SiteForge;
+function el(id){ return document.getElementById(id); }
+function escH(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+var TOTAL = SF.OPT_TOTAL, BATCH = 120, SCAN_CAP = 200000;
+var shown = 0, mode = 'all', letterFilter = '', query = '';
+
+/* ---- Best of the Best (deterministic pick) ---- */
+var BEST_IDX = 424242;
+var best = SF.optEntry(BEST_IDX);
+el('bestBody').innerHTML =
+  '<div style="display:flex;gap:16px;flex-wrap:wrap"><div style="flex:1;min-width:240px">'+SF.optPreviewSVG(best)+'</div>' +
+  '<div style="flex:1;min-width:240px"><h3 style="color:var(--gold2);margin-top:0">'+escH(best.name)+'</h3>' +
+  '<p class="dim">'+escH(best.desc)+'</p>' +
+  '<div class="stats"><span class="stat">\uD83C\uDFC6 Top pick</span><span class="stat">'+escH(best.code)+'</span>' +
+  '<span class="stat">'+escH(best.cat)+'</span><span class="stat">'+escH(best.style)+'</span></div>' +
+  '<button class="btn" data-use="'+best.id+'">Use this template</button> ' +
+  '<button class="btn ghost" data-prev="'+best.id+'">Preview</button></div></div>';
+
+function cardHTML(e){
+  return '<div class="card">'+SF.optPreviewSVG(e) +
+    '<h3>'+escH(e.name)+'</h3><p class="code">'+escH(e.code)+' &middot; '+escH(e.cat)+' &middot; '+escH(e.style)+'</p>' +
+    '<button class="btn ghost" data-prev="'+e.id+'">Preview</button> ' +
+    '<button class="btn" data-use="'+e.id+'">Use it</button></div>';
+}
+
+function updateCounter(){
+  el('counter').textContent = shown.toLocaleString() + ' / ' + TOTAL.toLocaleString() + ' templates shown';
+}
+
+function appendBatch(){
+  var html = '';
+  for(var i = 0; i < BATCH && shown < TOTAL; i++, shown++){
+    html += cardHTML(SF.optEntry(shown));
+  }
+  el('cards').insertAdjacentHTML('beforeend', html);
+  updateCounter();
+  el('moreBtn').style.display = (mode === 'all' && shown < TOTAL) ? '' : 'none';
+}
+
+function scanCollect(test, max){
+  var out = [];
+  for(var i = 0; i < SCAN_CAP && out.length < max; i++){
+    var e = SF.optEntry(i);
+    if(test(e)) out.push(e);
+  }
+  return out;
+}
+
+function doSearch(){
+  query = el('q').value.trim().toLowerCase();
+  if(query.length < 2){ resetAll(); return; }
+  mode = 'search';
+  var res = scanCollect(function(e){
+    return (e.name + ' ' + e.cat + ' ' + e.style).toLowerCase().indexOf(query) >= 0;
+  }, 240);
+  shown = res.length;
+  el('cards').innerHTML = res.map(cardHTML).join('') ||
+    '<p class="dim">No matches in the scanned range. Try another word.</p>';
+  el('scanNote').textContent = 'Search scanned the first ' + SCAN_CAP.toLocaleString() + ' templates (' + res.length + ' matches).';
+  el('moreBtn').style.display = 'none';
+  updateCounter();
+}
+
+function doLetter(L){
+  letterFilter = L;
+  document.querySelectorAll('#letters button').forEach(function(b){
+    b.classList.toggle('sel', b.textContent === L);
+  });
+  if(!L){ resetAll(); return; }
+  mode = 'letter';
+  var res = scanCollect(function(e){ return e.name.charAt(0).toUpperCase() === L; }, 240);
+  shown = res.length;
+  el('cards').innerHTML = res.map(cardHTML).join('') || '<p class="dim">No matches.</p>';
+  el('scanNote').textContent = 'Letter "' + L + '" scanned across the first ' + SCAN_CAP.toLocaleString() + ' templates (' + res.length + ' matches).';
+  el('moreBtn').style.display = 'none';
+  updateCounter();
+}
+
+function resetAll(){
+  mode = 'all'; letterFilter = ''; query = ''; el('q').value = '';
+  el('scanNote').textContent = '';
+  el('cards').innerHTML = ''; shown = 0;
+  document.querySelectorAll('#letters button').forEach(function(b){ b.classList.remove('sel'); });
+  appendBatch();
+}
+
+el('letters').innerHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(function(L){
+  return '<button type="button">' + L + '</button>';
+}).join('');
+el('letters').addEventListener('click', function(e){
+  var b = e.target.closest('button'); if(!b) return;
+  doLetter(letterFilter === b.textContent ? '' : b.textContent);
+});
+el('qgo').onclick = doSearch;
+el('q').addEventListener('keydown', function(e){ if(e.key === 'Enter') doSearch(); });
+el('qclear').onclick = resetAll;
+el('moreBtn').onclick = appendBatch;
+
+/* preview modal + use-template */
+function openPreview(e){
+  el('pvTitle').textContent = e.name;
+  el('pvBody').innerHTML = SF.optPreviewSVG(e) +
+    '<p class="dim">'+escH(e.desc)+'</p>' +
+    '<div class="stats"><span class="stat">'+escH(e.code)+'</span><span class="stat">'+escH(e.cat)+
+    '</span><span class="stat">'+escH(e.style)+'</span></div>' +
+    '<button class="btn" data-use="'+e.id+'">Use this template</button>';
+  el('pvModal').classList.add('open');
+}
+document.addEventListener('click', function(e){
+  var p = e.target.closest('[data-prev]');
+  if(p){ openPreview(SF.optEntry(+p.getAttribute('data-prev'))); return; }
+  var u = e.target.closest('[data-use]');
+  if(u){
+    var t = SF.optEntry(+u.getAttribute('data-use'));
+    try{
+      sessionStorage.setItem('swc-template', JSON.stringify({
+        name: t.name, desc: 'A ' + t.style.toLowerCase() + ' ' + t.cat.toLowerCase() + ' website',
+        cat: t.cat, code: t.code
+      }));
+    }catch(err){}
+    location.href = 'builder.html';
+  }
+});
+el('pvClose').onclick = function(){ el('pvModal').classList.remove('open'); };
+el('pvModal').addEventListener('click', function(e){ if(e.target === el('pvModal')) el('pvClose').onclick(); });
+
+resetAll();
+})();
+</script>
+</body>
+</html>

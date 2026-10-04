@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Signature Website Creator — an AI that builds real websites</title>
+<meta name="description" content="Describe a website in plain words and get a real, working website. Free. Built by the Signature Website Creator.">
+<style>
+:root{--bg:#0a0f1e;--panel:#111a2e;--panel2:#0d1425;--gold:#d4a017;--gold2:#f0c64a;--cyan:#59d6ff;--txt:#e8ecf4;--dim:#9aa4b2;--line:#24304d;--grn:#5fd97a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.heroimg{width:100%;max-height:340px;object-fit:cover;display:block;border-bottom:3px double var(--gold)}
+.hero{text-align:center;padding:26px 14px 18px}
+.hero h1{margin:.2em 0 .1em;font-size:2em;letter-spacing:.08em;color:var(--gold2)}
+.kicker{color:var(--gold);letter-spacing:.28em;font-size:.8em;margin:0}
+.hero p{color:var(--dim);max-width:660px;margin:.5em auto}
+.jah-tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--panel2);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:50}
+.jah-tabs a.tablink{flex:0 0 auto;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:9px 14px;font-size:.92em;text-decoration:none;white-space:nowrap}
+.jah-tabs a.tablink.on{background:var(--gold);color:#241a02;font-weight:700;border-color:var(--gold)}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}
+.sec h2{margin-top:0;color:var(--gold2)}
+.btn{display:inline-block;background:var(--gold);color:#241a02;font-weight:700;border:0;border-radius:8px;padding:12px 22px;font-size:1.05em;cursor:pointer;margin:6px 8px 6px 0;text-decoration:none}
+.btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn:active{transform:scale(.97)}
+.dim{color:var(--dim);font-size:.92em}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.step{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px}
+.step .n{font-size:1.6em}
+.step h3{margin:.4em 0;color:var(--cyan)}
+.jahnet{background:#070b16;color:#9aa4b2;font-size:.78em;padding:14px 10px;text-align:center;line-height:2.1}
+.jahnet .t{color:var(--gold);font-weight:700;letter-spacing:.25em;margin-right:10px}
+.jahnet a{color:#9fc2ff;text-decoration:none;margin:0 7px;white-space:nowrap}
+.jahnet .here{color:var(--gold);font-weight:700;margin:0 7px}
+footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
+</style>
+</head>
+<body>
+<img class="heroimg" src="assets/hero.jpg" alt="An AI architect robot building glowing websites">
+<div class="hero">
+  <p class="kicker">SITE 31 OF 31 &middot; THE JAH NETWORK</p>
+  <h1>The Signature Website Creator</h1>
+  <p>An AI website builder, like me, that builds <b>real websites</b> &mdash; on real pages you can preview, download, and put online. Free, forever.</p>
+</div>
+
+<nav class="jah-tabs" aria-label="Site pages">
+  <a class="tablink on" href="index.html" aria-current="page">&#127968; Main</a>
+  <a class="tablink" href="builder.html">&#128736;&#65039; Builder</a>
+  <a class="tablink" href="mirror.html">&#12978; Mirror</a>
+  <a class="tablink" href="guide.html">&#128214; Guide</a>
+  <a class="tablink" href="sites.html">&#128449; My Websites</a>
+  <a class="tablink" href="options.html">&#127912; 1M Options</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="sec" id="intro">
+    <h2>What this is</h2>
+    <p>You describe a website in plain words &mdash; <i>&ldquo;a bakery site with menu and photos&rdquo;</i> &mdash; and the Creator builds you a complete, working website: a main page, an archive page, a sitemap, everything. No coding needed. No fake magic either: the Builder shows you exactly which parts it picked and why.</p>
+    <button class="btn ghost" onclick="readEl('intro')">&#128266; Read this page</button>
+    <button class="btn ghost" onclick="stopReading()">&#9209; Stop</button>
+  </div>
+
+  <div class="sec">
+    <h2>Our mission</h2>
+    <p>Anyone &mdash; kid, grandparent, first-timer &mdash; should be able to describe a website and <b>get a real one</b>. Not a mockup, not a screenshot: real pages that work, with search, read-aloud, copy/download, and an AI helper, following the same formula as every site in the JAH Network. Free for everyone, no account, no catch.</p>
+  </div>
+
+  <div class="sec">
+    <h2>The product</h2>
+    <p>The Builder walks you through 4 kid-simple steps:</p>
+    <div class="steps">
+      <div class="step"><div class="n">&#128172;</div><h3>1. Describe</h3><p class="dim">Tell it what website you want, in your own words.</p></div>
+      <div class="step"><div class="n">&#129302;</div><h3>2. How smart?</h3><p class="dim">Static (fastest), AI Llama Online, or AI Llama Offline.</p></div>
+      <div class="step"><div class="n">&#9881;&#65039;</div><h3>3. Automate parts</h3><p class="dim">Flip toggles: archive, best-of-the-best, read-aloud, search, gallery, contact.</p></div>
+      <div class="step"><div class="n">&#128640;</div><h3>4. Build</h3><p class="dim">Preview it live, see what was picked and why, download the files.</p></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="builder.html">Open the Builder &rarr;</a></p>
+  </div>
+
+  <div class="sec">
+    <h2>Every generated site includes</h2>
+    <ul>
+      <li>Hero, intro, and tab bar &mdash; catalog tab always last</li>
+      <li>Best-of-the-Best pinned above the A&ndash;Z archive</li>
+      <li>Working search, read-aloud, copy/download</li>
+      <li>AI chat hook (SignatureLlama.ask pattern) in Online/Offline modes</li>
+      <li>The full JAH Network nav bar &mdash; sitemap.xml + robots.txt</li>
+    </ul>
+    <p class="dim">Honest rule: the Online and Offline options change the actual generated code &mdash; Online loads the free Llama engine script; Offline looks for the engine in a local folder and says plainly how to install it.</p>
+  </div>
+
+</div>
+
+<div class="jahnet"><span class="t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-comics/">12 The Signature Comic Store</a><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a><a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI Robot Matcher</a><a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a><a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">26 The Signature Cyber Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">27 The Signature 3D Print Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-earth/">28 Signature Earth</a><a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">29 The Signature Flight School</a><a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">30 The Signature Game Store</a><span class="here">31 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
+<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+
+<script>
+function readAloud(t){try{speechSynthesis.cancel();}catch(e){}
+if(!("speechSynthesis" in window)){alert("Read-aloud is not supported in this browser.");return;}
+try{speechSynthesis.speak(new SpeechSynthesisUtterance(String(t).slice(0,4000)));}catch(e){alert("Could not start reading.");}}
+function stopReading(){try{speechSynthesis.cancel();}catch(e){}}
+function readEl(id){var el=document.getElementById(id);if(el)readAloud(el.innerText||el.textContent);}
+</script>
+</body>
+</html>

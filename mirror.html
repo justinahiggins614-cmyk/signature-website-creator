@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Signature Website Creator — Mirror a Website</title>
+<meta name="description" content="Paste any website URL and get a fresh original page in its layout style — with YOUR brand, YOUR products, YOUR images.">
+<style>
+:root{--bg:#0a0f1e;--panel:#111a2e;--panel2:#0d1425;--gold:#d4a017;--gold2:#f0c64a;--cyan:#59d6ff;--txt:#e8ecf4;--dim:#9aa4b2;--line:#24304d;--grn:#5fd97a;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.hero{text-align:center;padding:22px 14px 10px}
+.hero h1{margin:.2em 0 .1em;font-size:1.8em;color:var(--gold2)}
+.kicker{color:var(--gold);letter-spacing:.28em;font-size:.78em;margin:0}
+.jah-tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--panel2);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:50}
+.jah-tabs a.tablink{flex:0 0 auto;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:9px 14px;font-size:.92em;text-decoration:none;white-space:nowrap}
+.jah-tabs a.tablink.on{background:var(--gold);color:#241a02;font-weight:700;border-color:var(--gold)}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}
+.sec h2{margin-top:0;color:var(--gold2)}
+.btn{display:inline-block;background:var(--gold);color:#241a02;font-weight:700;border:0;border-radius:8px;padding:12px 22px;font-size:1.05em;cursor:pointer;margin:6px 8px 6px 0;text-decoration:none}
+.btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn.big{font-size:1.2em;padding:14px 32px}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.dim{color:var(--dim);font-size:.92em}
+input.txt,textarea.txt{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font-size:1em;margin:4px 0}
+label.f{display:block;margin:10px 0 2px;font-weight:700}
+.legal{background:#141021;border:2px solid var(--grn);border-radius:10px;padding:12px 14px;margin:16px 0}
+.legal b{color:var(--grn)}
+.presets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.preset{border:2px solid var(--line);border-radius:10px;padding:10px;cursor:pointer;background:var(--panel2)}
+.preset.sel{border-color:var(--gold);box-shadow:0 0 12px #d4a01755}
+.preset h3{margin:.3em 0;color:var(--cyan)}
+#bpBox{display:none}
+.sectags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.sectag{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.85em}
+.swatch{display:inline-block;width:34px;height:34px;border-radius:8px;border:1px solid var(--line);vertical-align:middle;margin-right:8px}
+.prow{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}
+.prow img{max-width:120px;border-radius:8px;display:block;margin:6px 0}
+#previewFrame{width:100%;height:62vh;border:2px solid var(--gold);border-radius:10px;background:#fff}
+.dlgrid{display:flex;flex-wrap:wrap;gap:8px}
+.jahnet{background:#070b16;color:#9aa4b2;font-size:.78em;padding:14px 10px;text-align:center;line-height:2.1}
+.jahnet .t{color:var(--gold);font-weight:700;letter-spacing:.25em;margin-right:10px}
+.jahnet a{color:#9fc2ff;text-decoration:none;margin:0 7px;white-space:nowrap}
+.jahnet .here{color:var(--gold);font-weight:700;margin:0 7px}
+footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
+.spin{display:inline-block;width:18px;height:18px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:sp 1s linear infinite;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <p class="kicker">SITE 31 OF 31 &middot; THE JAH NETWORK</p>
+  <h1>&#12978; Mirror a Website</h1>
+  <p class="dim">Love how a website is laid out? We rebuild that <b>layout style</b> for you &mdash; with <b>your</b> brand, <b>your</b> products, <b>your</b> images, <b>your</b> words.</p>
+</div>
+
+<nav class="jah-tabs" aria-label="Site pages">
+  <a class="tablink" href="index.html">&#127968; Main</a>
+  <a class="tablink" href="builder.html">&#128736;&#65039; Builder</a>
+  <a class="tablink on" href="mirror.html" aria-current="page">&#12978; Mirror</a>
+  <a class="tablink" href="guide.html">&#128214; Guide</a>
+  <a class="tablink" href="sites.html">&#128449; My Websites</a>
+  <a class="tablink" href="options.html">&#127912; 1M Options</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="legal">
+    <b>&#9888;&#65039; Our promise, in plain words:</b> the Mirror recreates the <b>layout style</b> for your own brand and products &mdash; it <b>never</b> copies the original site's name, logos, trademarks, product names, marketing words, or images. What comes out is 100% yours.
+  </div>
+
+  <div class="sec">
+    <h2>Step 1 &mdash; Paste a website address</h2>
+    <p class="dim">Example: a sneaker store front page you admire. We'll read its <b>layout structure</b> (where the banner, grids, and sections sit &mdash; never its words or pictures).</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input class="txt" id="mUrl" placeholder="https://example.com" style="flex:1;min-width:220px" inputmode="url">
+      <button class="btn" id="mRead">Read the layout</button>
+    </div>
+    <p class="dim" id="mReadMsg"></p>
+    <div id="bpBox">
+      <h3>Layout skeleton we found</h3>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px" id="bpSvg"></div>
+        <div style="flex:1;min-width:220px">
+          <p class="dim">From: <b id="bpSource"></b></p>
+          <div class="sectags" id="bpTags"></div>
+          <p class="dim" id="bpMood"></p>
+          <p class="dim"><i>Only boxes and colors were read &mdash; no words, no pictures, no brand.</i></p>
+        </div>
+      </div>
+    </div>
+    <div id="presetBox" style="display:none">
+      <h3>Pick the closest layout style</h3>
+      <p class="dim">That page wouldn't let us read it directly (most sites block outside readers &mdash; that's normal). Pick the skeleton that looks closest:</p>
+      <div class="presets" id="presetGrid"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Step 2 &mdash; Make it yours</h2>
+    <label class="f" for="mBrand">Your brand name</label>
+    <input class="txt" id="mBrand" placeholder="e.g. Manon's Empty Can Art" maxlength="60">
+    <label class="f" for="mTag">Tagline <span class="dim">(optional)</span></label>
+    <input class="txt" id="mTag" placeholder="e.g. Wild art on empty cans" maxlength="160">
+    <label class="f" for="mHero">Banner image <span class="dim">(your own picture &mdash; optional)</span></label>
+    <input type="file" id="mHero" accept="image/*">
+    <img id="mHeroPrev" style="max-width:200px;border-radius:8px;display:none;margin-top:6px" alt="Banner preview">
+    <h3>Your products</h3>
+    <p class="dim">Add each product with YOUR name, YOUR description, YOUR photo.</p>
+    <div id="prodList"></div>
+    <button class="btn ghost" id="mAddProd">+ Add a product</button>
+  </div>
+
+  <div class="sec" style="text-align:center">
+    <h2>Step 3 &mdash; Build your mirror page</h2>
+    <p class="dim">Fresh original page, mirrored layout, everything yours.</p>
+    <button class="btn big" id="mBuild">Build my mirror page &#12978;</button>
+    <p class="dim" id="mBuildMsg"></p>
+  </div>
+
+  <div class="sec" id="mResult" style="display:none">
+    <h2>&#128064; Your mirror page</h2>
+    <iframe id="previewFrame" title="Mirror page preview" sandbox="allow-scripts"></iframe>
+    <h3>&#129302; What was built and why</h3>
+    <ul id="mPicks"></ul>
+    <h3>&#128229; Download</h3>
+    <div class="dlgrid" id="mDl"></div>
+    <p style="margin-top:10px"><a class="btn ghost" href="sites.html">See it in My Websites</a></p>
+  </div>
+
+</div>
+
+<div class="jahnet"><span class="t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-comics/">12 The Signature Comic Store</a><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a><a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI Robot Matcher</a><a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a><a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">26 The Signature Cyber Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">27 The Signature 3D Print Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-earth/">28 Signature Earth</a><a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">29 The Signature Flight School</a><a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">30 The Signature Game Store</a><span class="here">31 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
+<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+
+<script src="js/builder.js"></script>
+<script src="js/builder2.js"></script>
+<script src="js/builder3.js"></script>
+<script src="js/builder4.js"></script>
+<script src="js/builder5.js"></script>
+<script>
+(function(){
+'use strict';
+var SF = window.SiteForge;
+function el(id){ return document.getElementById(id); }
+function escH(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+var blueprint = null;   /* {kind, source, sections[], mood} */
+var heroDataURL = '';
+
+/* ---- preset cards ---- */
+function renderPresets(){
+  el('presetGrid').innerHTML = SF.PRESETS.map(function(p,i){
+    return '<div class="preset'+(i===0?' sel':'')+'" data-p="'+p.id+'"><h3>'+escH(p.name)+
+      '</h3><p class="dim">'+escH(p.like)+'</p>'+SF.blueprintSVG(p)+'</div>';
+  }).join('');
+  el('presetGrid').addEventListener('click', function(e){
+    var c = e.target.closest('.preset'); if(!c) return;
+    el('presetGrid').querySelectorAll('.preset').forEach(function(x){ x.classList.remove('sel'); });
+    c.classList.add('sel');
+    var p = SF.PRESETS.find(function(x){ return x.id === c.getAttribute('data-p'); });
+    blueprint = { kind:'preset', source:'a '+p.name.toLowerCase()+'-style layout', sections:p.sections.slice(), mood:null };
+  });
+  var p0 = SF.PRESETS[0];
+  blueprint = { kind:'preset', source:'a '+p0.name.toLowerCase()+'-style layout', sections:p0.sections.slice(), mood:null };
+}
+renderPresets();
+
+/* ---- read layout from URL ---- */
+el('mRead').onclick = async function(){
+  var url = el('mUrl').value.trim();
+  if(!url){ el('mReadMsg').textContent = 'Paste a website address first.'; return; }
+  el('mReadMsg').innerHTML = '<span class="spin"></span> Reading the layout structure\u2026 (words and pictures are never taken)';
+  el('bpBox').style.display = 'none';
+  el('presetBox').style.display = 'none';
+  try{
+    var bp = await SF.readLayout(url);
+    blueprint = bp;
+    el('bpSvg').innerHTML = SF.blueprintSVG(bp);
+    el('bpSource').textContent = bp.source;
+    el('bpTags').innerHTML = bp.sections.map(function(s){
+      return '<span class="sectag">'+escH(SF.SECTION_LABEL[s]||s)+'</span>';
+    }).join('');
+    el('bpMood').innerHTML = bp.mood
+      ? '<span class="swatch" style="background:'+escH(bp.mood.bg)+'"></span> page background &nbsp; <span class="swatch" style="background:'+escH(bp.mood.accent)+'"></span> accent color'
+      : 'Color mood: not readable \u2014 your brand colors will be used.';
+    el('bpBox').style.display = 'block';
+    el('mReadMsg').textContent = 'Layout read! Only the structure was taken \u2014 none of its words, pictures, or brand.';
+  }catch(err){
+    el('mReadMsg').textContent = '';
+    el('presetBox').style.display = 'block';
+    el('mReadMsg').innerHTML = '<b>Couldn\u2019t read that page directly</b> (most sites block outside readers \u2014 that\u2019s normal and fine). Pick the closest layout style below instead \u2014 your brand and products still make it 100% yours.';
+  }
+};
+
+/* ---- image upload with downscale ---- */
+function fileToDataURL(file){
+  return new Promise(function(res, rej){
+    if(!file || !file.type.startsWith('image/')) return rej(new Error('not an image'));
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function(){
+      try{
+        var max = 1000, w = img.width, h = img.height;
+        if(Math.max(w,h) > max){ var s = max / Math.max(w,h); w = Math.round(w*s); h = Math.round(h*s); }
+        var c = document.createElement('canvas'); c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        res(c.toDataURL('image/jpeg', 0.82));
+      }catch(e){ URL.revokeObjectURL(url); rej(e); }
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('could not read image')); };
+    img.src = url;
+  });
+}
+el('mHero').addEventListener('change', async function(){
+  try{
+    heroDataURL = await fileToDataURL(this.files[0]);
+    el('mHeroPrev').src = heroDataURL; el('mHeroPrev').style.display = 'block';
+  }catch(e){ alert('That image could not be read. Try a JPG or PNG.'); }
+});
+
+/* ---- products ---- */
+var prodImgs = {};
+function addProductRow(){
+  var i = document.querySelectorAll('.prow').length;
+  var d = document.createElement('div');
+  d.className = 'prow'; d.setAttribute('data-i', i);
+  d.innerHTML = '<label class="f">Product '+(i+1)+' name <span class="dim">(YOUR product name)</span></label>' +
+    '<input class="txt" data-pn placeholder="e.g. Midnight City Can">' +
+    '<label class="f">Short description <span class="dim">(YOUR words)</span></label>' +
+    '<input class="txt" data-pd placeholder="e.g. Hand-painted city skyline on a recycled can">' +
+    '<label class="f">Photo <span class="dim">(YOUR photo)</span></label>' +
+    '<input type="file" data-pi accept="image/*"><img data-pv style="display:none" alt="Product photo preview">' +
+    '<button class="btn ghost" data-rm>Remove</button>';
+  el('prodList').appendChild(d);
+  d.querySelector('[data-pi]').addEventListener('change', async function(){
+    try{
+      var du = await fileToDataURL(this.files[0]);
+      prodImgs[i] = du;
+      var pv = d.querySelector('[data-pv]'); pv.src = du; pv.style.display = 'block';
+    }catch(e){ alert('That image could not be read. Try a JPG or PNG.'); }
+  });
+  d.querySelector('[data-rm]').onclick = function(){ delete prodImgs[i]; d.remove(); renumber(); };
+}
+function renumber(){
+  document.querySelectorAll('.prow').forEach(function(d, n){
+    d.querySelector('.f').innerHTML = 'Product '+(n+1)+' name <span class="dim">(YOUR product name)</span>';
+  });
+}
+el('mAddProd').onclick = addProductRow;
+addProductRow(); addProductRow();
+
+/* re-mirror prefill from My Websites */
+try{
+  var rm = JSON.parse(sessionStorage.getItem('swc-remirror') || 'null');
+  if(rm){
+    el('mBrand').value = rm.brand || '';
+    el('mTag').value = rm.tagline || '';
+    if(rm.heroImg){ heroDataURL = rm.heroImg; el('mHeroPrev').src = heroDataURL; el('mHeroPrev').style.display = 'block'; }
+    if(rm.blueprint) blueprint = rm.blueprint;
+    if(rm.products && rm.products.length){
+      el('prodList').innerHTML = ''; prodImgs = {};
+      rm.products.forEach(function(p, i){
+        addProductRow();
+        var rows = document.querySelectorAll('.prow');
+        var d = rows[rows.length - 1];
+        d.querySelector('[data-pn]').value = p.name || '';
+        d.querySelector('[data-pd]').value = p.blurb || '';
+        if(p.img){ prodImgs[i] = p.img; var pv = d.querySelector('[data-pv]'); pv.src = p.img; pv.style.display = 'block'; }
+      });
+    }
+    sessionStorage.removeItem('swc-remirror');
+  }
+}catch(e){}
+
+/* ---- build ---- */
+var curMirror = null;
+el('mBuild').onclick = function(){
+  var brand = el('mBrand').value.trim();
+  if(brand.length < 2){ el('mBuildMsg').textContent = 'Give your brand a name first.'; el('mBrand').focus(); return; }
+  var products = [];
+  document.querySelectorAll('.prow').forEach(function(d){
+    var n = d.querySelector('[data-pn]').value.trim();
+    if(!n) return;
+    products.push({ name: n, blurb: d.querySelector('[data-pd]').value.trim(), img: prodImgs[+d.getAttribute('data-i')] || '' });
+  });
+  if(!products.length){ el('mBuildMsg').textContent = 'Add at least one product with YOUR name and photo.'; return; }
+  el('mBuildMsg').textContent = 'Building\u2026';
+  curMirror = SF.buildMirrorSite({
+    brand: brand, tagline: el('mTag').value.trim(),
+    blueprint: blueprint, products: products, heroImg: heroDataURL
+  });
+  el('previewFrame').srcdoc = curMirror.files['index.html'];
+  el('mPicks').innerHTML = curMirror.picks.map(function(p){
+    return '<li><b>\u2713 '+escH(p.component)+'</b><br><span class="dim">'+escH(p.why)+'</span></li>';
+  }).join('');
+  el('mDl').innerHTML = Object.keys(curMirror.files).map(function(f){
+    return '<button class="btn ghost" data-dl="'+escH(f)+'">\u2B07\uFE0F '+escH(f)+'</button>';
+  }).join('');
+  el('mResult').style.display = 'block';
+  el('mBuildMsg').textContent = '';
+  el('mResult').scrollIntoView();
+  /* save to My Websites */
+  try{
+    var all = JSON.parse(localStorage.getItem('swc-sites-v1') || '[]');
+    var mo = { brand: brand, tagline: el('mTag').value.trim(), heroImg: heroDataURL,
+      blueprint: blueprint, products: products };
+    all.unshift({ id:'swc'+Date.now(), name:curMirror.name, slug:curMirror.slug, ts:Date.now(),
+      smartness:'static', smartLabel:'Mirror page (static)', ownerName:'', hasStore:false,
+      mirror:true, source:curMirror.source, files:curMirror.files,
+      picks:curMirror.picks.map(function(p){ return p.component; }), mirrorOpts: mo });
+    localStorage.setItem('swc-sites-v1', JSON.stringify(all));
+  }catch(e){}
+};
+el('mDl').addEventListener('click', function(e){
+  var b = e.target.closest('[data-dl]'); if(!b || !curMirror) return;
+  var f = b.getAttribute('data-dl');
+  var blob = new Blob([curMirror.files[f]], {type:'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = f;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+});
+})();
+</script>
+</body>
+</html>

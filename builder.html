@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Signature Website Creator — Builder</title>
+<meta name="description" content="Describe a website in plain words and get a real working website. Edit it live, lock it in, download it.">
+<style>
+:root{--bg:#0a0f1e;--panel:#111a2e;--panel2:#0d1425;--gold:#d4a017;--gold2:#f0c64a;--cyan:#59d6ff;--txt:#e8ecf4;--dim:#9aa4b2;--line:#24304d;--grn:#5fd97a;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.hero{text-align:center;padding:22px 14px 10px}
+.hero h1{margin:.2em 0 .1em;font-size:1.8em;color:var(--gold2)}
+.kicker{color:var(--gold);letter-spacing:.28em;font-size:.78em;margin:0}
+.jah-tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--panel2);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:50}
+.jah-tabs a.tablink{flex:0 0 auto;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:9px 14px;font-size:.92em;text-decoration:none;white-space:nowrap}
+.jah-tabs a.tablink.on{background:var(--gold);color:#241a02;font-weight:700;border-color:var(--gold)}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}
+.sec h2{margin-top:0;color:var(--gold2)}
+.btn{display:inline-block;background:var(--gold);color:#241a02;font-weight:700;border:0;border-radius:8px;padding:12px 22px;font-size:1.05em;cursor:pointer;margin:6px 8px 6px 0;text-decoration:none}
+.btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn.big{font-size:1.25em;padding:14px 34px}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.dim{color:var(--dim);font-size:.92em}
+input.txt,textarea.txt,select.txt{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font-size:1em;margin:4px 0}
+label.f{display:block;margin:10px 0 2px;font-weight:700}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pick{border:2px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;background:var(--panel2)}
+.pick.sel{border-color:var(--gold);box-shadow:0 0 12px #d4a01755}
+.pick h3{margin:.2em 0;color:var(--cyan)}
+.togs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.tog{display:flex;gap:10px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer}
+.tog input{margin-top:4px;transform:scale(1.3)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.9em}
+.chip:hover{border-color:var(--gold)}
+#editView{display:none}
+#previewFrame{width:100%;height:62vh;border:2px solid var(--gold);border-radius:10px;background:#fff}
+#editbar{position:sticky;bottom:0;z-index:60;background:#0d1425f2;border-top:2px solid var(--gold);padding:10px 12px;border-radius:12px 12px 0 0}
+#editbar .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#editbar input,#editbar select,#editbar textarea{background:var(--bg);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px;font-size:.95em}
+#editbar input[name=en]{min-width:170px}
+#editbar textarea[name=ed]{min-width:220px;flex:1}
+.checks{display:flex;flex-wrap:wrap;gap:10px;font-size:.85em;margin:6px 0}
+.checks .ok{color:var(--grn)} .checks .no{color:var(--dim)}
+@keyframes lockglow{0%,100%{box-shadow:0 0 6px var(--gold)}50%{box-shadow:0 0 26px var(--gold2),0 0 44px var(--gold)}}
+.btn.glowing{animation:lockglow 1.6s infinite;background:var(--gold2)}
+#picksList li{margin:6px 0}
+#picksList .why{color:var(--dim);font-size:.9em}
+.modal{position:fixed;inset:0;background:#000a;display:none;z-index:100;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.mbox{background:var(--panel);border:2px solid var(--gold);border-radius:12px;max-width:560px;padding:22px}
+.mbox h2{color:var(--gold2);margin-top:0}
+.legal{background:#141021;border:1px solid var(--gold);border-radius:8px;padding:10px 12px;font-size:.9em;margin:10px 0}
+.dlgrid{display:flex;flex-wrap:wrap;gap:8px}
+.jahnet{background:#070b16;color:#9aa4b2;font-size:.78em;padding:14px 10px;text-align:center;line-height:2.1}
+.jahnet .t{color:var(--gold);font-weight:700;letter-spacing:.25em;margin-right:10px}
+.jahnet a{color:#9fc2ff;text-decoration:none;margin:0 7px;white-space:nowrap}
+.jahnet .here{color:var(--gold);font-weight:700;margin:0 7px}
+footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
+details.more{margin-top:8px}
+details.more summary{cursor:pointer;color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="hero">
+  <p class="kicker">SITE 31 OF 31 &middot; THE JAH NETWORK</p>
+  <h1>&#128736;&#65039; The Builder</h1>
+  <p class="dim">Kid-simple. Describe it, pick how smart, flip toggles, build. Then edit it live.</p>
+</div>
+
+<nav class="jah-tabs" aria-label="Site pages">
+  <a class="tablink" href="index.html">&#127968; Main</a>
+  <a class="tablink on" href="builder.html" aria-current="page">&#128736;&#65039; Builder</a>
+  <a class="tablink" href="mirror.html">&#12978; Mirror</a>
+  <a class="tablink" href="guide.html">&#128214; Guide</a>
+  <a class="tablink" href="sites.html">&#128449; My Websites</a>
+  <a class="tablink" href="options.html">&#127912; 1M Options</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ BUILD VIEW ============ -->
+<div id="buildView">
+  <div id="tplNote"></div>
+
+  <div class="sec">
+    <h2>Step 1 &mdash; Describe your website</h2>
+    <label class="f" for="fName">Website name</label>
+    <input class="txt" id="fName" placeholder="e.g. Sunny Bakery" maxlength="60">
+    <label class="f" for="fOwner">Your name (shown on the site as the owner)</label>
+    <input class="txt" id="fOwner" placeholder="e.g. Jamie Rivera" maxlength="80">
+    <label class="f" for="fInfo">About you <span class="dim">(optional)</span></label>
+    <input class="txt" id="fInfo" placeholder="e.g. Family bakery since 1998" maxlength="300">
+    <label class="f" for="fDesc">What should the website be about? <span class="dim">Use plain words.</span></label>
+    <textarea class="txt" id="fDesc" rows="4" placeholder="e.g. a bakery site with menu and photos"></textarea>
+    <div class="chips" id="exChips"></div>
+    <label class="f" for="fPw">Manager password <span class="dim">(lets YOU edit the site by hand after the AI builds it)</span></label>
+    <input class="txt" id="fPw" type="password" placeholder="Pick a password you'll remember" autocomplete="new-password">
+    <label class="f" for="fPw2">Repeat the password</label>
+    <input class="txt" id="fPw2" type="password" placeholder="Repeat it" autocomplete="new-password">
+    <p class="dim" id="pwMsg"></p>
+  </div>
+
+  <div class="sec">
+    <h2>Step 2 &mdash; How smart should it be?</h2>
+    <div class="cards3" id="smartCards">
+      <div class="pick sel" data-smart="static"><h3>&#9889; Static site</h3><p class="dim">Pure HTML. Fastest, works everywhere, no internet needed. Questions answered from a built-in guide.</p></div>
+      <div class="pick" data-smart="online"><h3>&#129302; AI Llama Online</h3><p class="dim">Loads the free Signature Llama engine and answers live. Needs internet.</p></div>
+      <div class="pick" data-smart="offline"><h3>&#128190; AI Llama Offline</h3><p class="dim">Looks for the Llama engine in a local folder first &mdash; works with no connection. The page tells you plainly how to install the engine files.</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Step 3 &mdash; Automate parts?</h2>
+    <p class="dim">Flip on the parts you want the AI to build for you.</p>
+    <div class="togs" id="togGrid"></div>
+  </div>
+
+  <div class="sec" style="text-align:center">
+    <h2>Step 4 &mdash; Build</h2>
+    <p class="dim">The AI assembles your site from real components and shows you exactly what it picked and why.</p>
+    <button class="btn big" id="buildBtn">Build my website &#128640;</button>
+    <p class="dim" id="buildMsg"></p>
+  </div>
+</div>
+
+<!-- ============ EDIT VIEW ============ -->
+<div id="editView">
+  <div class="sec">
+    <h2>&#128064; Live view <span class="dim">&mdash; this is your site, updating as you edit</span></h2>
+    <iframe id="previewFrame" title="Live preview of your website" sandbox="allow-scripts"></iframe>
+  </div>
+  <div class="sec">
+    <h2>&#129302; What the AI picked and why</h2>
+    <ul id="picksList"></ul>
+  </div>
+  <div style="height:10px"></div>
+  <div id="editbar">
+    <div class="row">
+      <input name="en" id="eName" placeholder="Site name" maxlength="60" aria-label="Site name">
+      <input name="eo" id="eOwner" placeholder="Your name" maxlength="80" aria-label="Your name">
+      <textarea name="ed" id="eDesc" rows="1" placeholder="Describe your website…" aria-label="Description"></textarea>
+      <select id="eSmart" aria-label="How smart">
+        <option value="static">Static</option>
+        <option value="online">AI Llama Online</option>
+        <option value="offline">AI Llama Offline</option>
+      </select>
+    </div>
+    <details class="more"><summary>More edit options (toggles, password)</summary>
+      <div class="togs" id="eTogs" style="margin-top:8px"></div>
+      <div class="row" style="margin-top:8px">
+        <input id="ePw" type="password" placeholder="Manager password" style="min-width:170px" aria-label="Manager password">
+        <button class="btn ghost" id="backBtn">Back to setup</button>
+      </div>
+    </details>
+    <div class="checks" id="checks"></div>
+    <div class="row">
+      <button class="btn ghost" id="doneBtn">Done</button>
+      <button class="btn" id="lockBtn">&#128274; Lock In</button>
+      <span class="dim" id="lockHint"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RESULT VIEW ============ -->
+<div id="doneView" style="display:none">
+  <div class="sec" id="doneSummary"></div>
+  <div class="sec">
+    <h2>&#128064; Your finished site</h2>
+    <iframe id="doneFrame" title="Your finished website" sandbox="allow-scripts" style="width:100%;height:60vh;border:2px solid var(--gold);border-radius:10px;background:#fff"></iframe>
+  </div>
+  <div class="sec">
+    <h2>&#128229; Download your files</h2>
+    <p class="dim">Put these files together in one folder and open index.html &mdash; that's your website.</p>
+    <div class="dlgrid" id="dlGrid"></div>
+  </div>
+  <div class="sec" style="text-align:center">
+    <button class="btn ghost" id="keepEditing">Keep editing</button>
+    <button class="btn" id="lockBtn2">&#128274; Lock In</button>
+  </div>
+</div>
+
+</div>
+
+<!-- ============ PRICING MODAL ============ -->
+<div class="modal" id="priceModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <div class="mbox">
+    <h2 id="pmTitle">&#127881; Your site is locked in!</h2>
+    <div id="pmBody"></div>
+    <div class="legal"><b>Plain talk:</b> payments are between <b>you</b> and <b>your own</b> payment provider (like your own Stripe account). The Signature Website Creator never holds, routes, or processes money, and never stores card numbers or secrets. We stay out legally &mdash; the builder just makes the wiring easy.</div>
+    <div id="pmBtns"></div>
+  </div>
+</div>
+
+<div class="jahnet"><span class="t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-comics/">12 The Signature Comic Store</a><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a><a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI Robot Matcher</a><a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a><a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">26 The Signature Cyber Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">27 The Signature 3D Print Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-earth/">28 Signature Earth</a><a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">29 The Signature Flight School</a><a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">30 The Signature Game Store</a><span class="here">31 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
+<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+
+<script src="js/builder.js"></script>
+<script src="js/builder2.js"></script>
+<script src="js/builder3.js"></script>
+<script src="js/builder4.js"></script>
+<script>
+(function(){
+'use strict';
+var SF = window.SiteForge;
+var TOGS = [
+  ['archive', 'A\u2013Z archive', 'Every entry filed A\u2013Z on its own page.'],
+  ['best', 'Best of the Best', 'Top pick pinned open above the A\u2013Z list.'],
+  ['readaloud', 'Read-aloud', '\uD83D\uDD0A buttons on every page.'],
+  ['copydl', 'Copy/download', 'Copy & download buttons everywhere.'],
+  ['search', 'Search box', 'Find anything on the site instantly.'],
+  ['gallery', 'Photo gallery', 'Six photo slots you fill in.'],
+  ['contact', 'Contact form', 'Honest mailto form.'],
+  ['store', 'Sell things', 'Store + checkout. OPT-IN: off until you enable it with your own provider.']
+];
+var EXAMPLES = ['a bakery site with menu and photos', 'a dog grooming business with booking info',
+  'my photo portfolio', 'a band site with songs and show dates', 'a bike repair shop with prices'];
+
+function el(id){ return document.getElementById(id); }
+function togHTML(prefix){
+  return TOGS.map(function(t){
+    return '<label class="tog"><input type="checkbox" id="'+prefix+t[0]+'"'+(t[0]==='store'?'':' checked')+'>' +
+      '<span><b>'+t[1]+'</b><br><span class="dim">'+t[2]+'</span></span></label>';
+  }).join('');
+}
+el('togGrid').innerHTML = togHTML('t_');
+el('eTogs').innerHTML = togHTML('e_');
+el('exChips').innerHTML = EXAMPLES.map(function(x){
+  return '<button class="chip" type="button">'+x+'</button>';
+}).join('');
+el('exChips').addEventListener('click', function(e){
+  if(e.target.classList.contains('chip')){ el('fDesc').value = e.target.textContent; }
+});
+
+/* smartness cards */
+var smart = 'static';
+el('smartCards').addEventListener('click', function(e){
+  var c = e.target.closest('.pick'); if(!c) return;
+  smart = c.getAttribute('data-smart');
+  el('smartCards').querySelectorAll('.pick').forEach(function(p){
+    p.classList.toggle('sel', p === c);
+  });
+});
+
+/* template prefill */
+var tpl = null;
+try{ tpl = JSON.parse(sessionStorage.getItem('swc-template') || 'null'); }catch(e){}
+if(tpl){
+  el('fName').value = tpl.name || '';
+  el('fDesc').value = tpl.desc || '';
+  el('tplNote').innerHTML = '<div class="sec" style="border-color:var(--gold)">\u2728 Template loaded: <b>'+
+    escH(tpl.name||'')+'</b> ('+escH(tpl.cat||'')+'). Tweak anything, then build.</div>';
+  try{ sessionStorage.removeItem('swc-template'); }catch(e){}
+}
+var reedit = null;
+try{ reedit = JSON.parse(sessionStorage.getItem('swc-reedit') || 'null'); }catch(e){}
+if(reedit){
+  el('fName').value = reedit.name || '';
+  el('fOwner').value = reedit.ownerName || '';
+  el('fInfo').value = reedit.ownerInfo || '';
+  el('fDesc').value = reedit.description || '';
+  if(reedit.smartness){
+    smart = reedit.smartness;
+    el('smartCards').querySelectorAll('.pick').forEach(function(p){
+      p.classList.toggle('sel', p.getAttribute('data-smart') === smart);
+    });
+  }
+  if(reedit.auto) writeTogs('t_', reedit.auto);
+  if(reedit.passwordHash){ pwHash = reedit.passwordHash; el('fPw').value = '****'; el('fPw2').value = '****';
+    el('pwMsg').textContent = 'Password kept from your saved site (type a new one to change it).'; }
+  el('tplNote').innerHTML = '<div class="sec" style="border-color:var(--gold)">✏️ Editing your saved site: <b>'+
+    escH(reedit.name||'')+'</b>. Tweak anything, then build again.</div>';
+  try{ sessionStorage.removeItem('swc-reedit'); }catch(e){}
+}
+function escH(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+function readTogs(prefix){
+  var o = {};
+  TOGS.forEach(function(t){ var c = el(prefix+t[0]); o[t[0]] = c ? c.checked : false; });
+  return o;
+}
+function writeTogs(prefix, o){
+  TOGS.forEach(function(t){ var c = el(prefix+t[0]); if(c) c.checked = !!o[t[0]]; });
+}
+async function sha256hex(s){
+  var b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(b)).map(function(x){ return x.toString(16).padStart(2,'0'); }).join('');
+}
+
+/* live state */
+var cur = null;          // last buildSite() result
+var curOpts = null;      // last options used
+var pwHash = '';
+var locked = false;
+
+function baseOpts(){
+  return {
+    name: el('fName').value.trim(),
+    ownerName: el('fOwner').value.trim(),
+    ownerInfo: el('fInfo').value.trim(),
+    description: el('fDesc').value.trim(),
+    smartness: smart,
+    auto: readTogs('t_'),
+    passwordHash: pwHash
+  };
+}
+
+function completeness(o){
+  return [
+    ['Site name', o.name.length >= 2],
+    ['Your name', o.ownerName.length >= 2],
+    ['Description (10+ chars)', o.description.length >= 10],
+    ['Manager password (4+ chars)', (el('fPw').value === '****' && !!pwHash) || (el('fPw').value.length >= 4 && el('fPw').value === el('fPw2').value)]
+  ];
+}
+
+el('buildBtn').onclick = async function(){
+  var pw = el('fPw').value, pw2 = el('fPw2').value;
+  if(pw === '****' && pw2 === '****' && pwHash){ /* kept saved password */ }
+  else {
+    if(pw.length < 4){ el('buildMsg').textContent = 'Please set a manager password (4+ characters).'; el('fPw').focus(); return; }
+    if(pw !== pw2){ el('buildMsg').textContent = 'The two passwords don\u2019t match.'; el('fPw2').focus(); return; }
+    pwHash = await sha256hex(pw);
+  }
+  el('buildMsg').textContent = 'Building\u2026';
+  await rebuild(true);
+  el('buildMsg').textContent = '';
+};
+
+var rebuildTimer = null;
+async function rebuild(first){
+  var o = baseOpts();
+  /* password may have been edited in the bottom bar */
+  var epw = el('ePw').value;
+  if(epw && epw !== '****'){ pwHash = await sha256hex(epw); o.passwordHash = pwHash; el('ePw').value = '****'; el('ePw').placeholder = 'Password set \u2713 (type to change)'; }
+  curOpts = o;
+  cur = SF.buildSite(o);
+  /* preview */
+  el('previewFrame').srcdoc = cur.files['index.html'];
+  el('doneFrame').srcdoc = cur.files['index.html'];
+  /* picks */
+  el('picksList').innerHTML = cur.picks.map(function(p){
+    return '<li><b>\u2713 '+escH(p.component)+'</b><br><span class="why">'+escH(p.why)+'</span></li>';
+  }).join('');
+  /* downloads */
+  el('dlGrid').innerHTML = Object.keys(cur.files).map(function(f){
+    return '<button class="btn ghost" data-dl="'+escH(f)+'">\u2B07\uFE0F '+escH(f)+'</button>';
+  }).join('');
+  if(first){
+    /* sync edit bar */
+    el('eName').value = o.name; el('eOwner').value = o.ownerName; el('eDesc').value = o.description;
+    el('eSmart').value = o.smartness; writeTogs('e_', o.auto);
+    el('buildView').style.display = 'none';
+    el('doneView').style.display = 'none';
+    el('editView').style.display = 'block';
+    el('editView').scrollIntoView();
+  }
+  updateLock();
+  return cur;
+}
+el('dlGrid').addEventListener('click', function(e){
+  var b = e.target.closest('[data-dl]'); if(!b || !cur) return;
+  var f = b.getAttribute('data-dl');
+  var blob = new Blob([cur.files[f]], {type: f.slice(-4) === '.xml' ? 'text/xml' : 'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = f;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+});
+
+/* live editing from the bottom bar */
+function scheduleRebuild(){
+  clearTimeout(rebuildTimer);
+  rebuildTimer = setTimeout(function(){
+    el('fName').value = el('eName').value;
+    el('fOwner').value = el('eOwner').value;
+    el('fDesc').value = el('eDesc').value;
+    smart = el('eSmart').value;
+    var t = readTogs('e_'); writeTogs('t_', t);
+    rebuild(false);
+  }, 450);
+}
+['eName','eOwner','eDesc','ePw'].forEach(function(id){
+  el(id).addEventListener('input', scheduleRebuild);
+});
+el('eSmart').addEventListener('change', scheduleRebuild);
+el('eTogs').addEventListener('change', scheduleRebuild);
+
+function updateLock(){
+  var o = curOpts || baseOpts();
+  var cs = completeness(o);
+  var allOk = cs.every(function(c){ return c[1]; });
+  el('checks').innerHTML = cs.map(function(c){
+    return '<span class="'+(c[1]?'ok':'no')+'">'+(c[1]?'\u2713':'\u25CB')+' '+escH(c[0])+'</span>';
+  }).join('');
+  ['lockBtn','lockBtn2'].forEach(function(id){
+    var b = el(id); if(!b) return;
+    b.classList.toggle('glowing', allOk && !locked);
+    b.disabled = !allOk || locked;
+  });
+  el('lockHint').textContent = locked ? 'Locked in \u2713' : (allOk ? 'Looks complete \u2014 lock it in!' : 'Fill every item above to light up Lock In.');
+}
+
+el('backBtn').onclick = function(){
+  el('editView').style.display = 'none';
+  el('buildView').style.display = 'block';
+  window.scrollTo(0, 0);
+};
+el('doneBtn').onclick = function(){
+  /* Done: leave edit mode, show the finished site + downloads */
+  el('editView').style.display = 'none';
+  el('doneView').style.display = 'block';
+  el('doneSummary').innerHTML = '<h2>\u2705 Your site is ready</h2><p><b>'+escH(cur.name)+
+    '</b> \u2014 '+escH(cur.smartLabel)+'. Preview it above, download the files below, or keep editing.</p>';
+  window.scrollTo(0, 0);
+};
+el('keepEditing').onclick = function(){
+  el('doneView').style.display = 'none';
+  el('editView').style.display = 'block';
+  el('editView').scrollIntoView();
+};
+
+/* LOCK IN */
+function doLockIn(){
+  if(locked || !cur) return;
+  locked = true;
+  var rec = {
+    id: 'swc' + Date.now(),
+    name: cur.name, slug: cur.slug, ts: Date.now(),
+    smartness: cur.smartness, smartLabel: cur.smartLabel,
+    ownerName: cur.ownerName, hasStore: cur.hasStore,
+    files: cur.files,
+    picks: cur.picks.map(function(p){ return p.component; }),
+    opts: { name: curOpts.name, ownerName: curOpts.ownerName, ownerInfo: curOpts.ownerInfo,
+      description: curOpts.description, smartness: curOpts.smartness, auto: curOpts.auto,
+      passwordHash: curOpts.passwordHash }
+  };
+  var all = [];
+  try{ all = JSON.parse(localStorage.getItem('swc-sites-v1') || '[]'); }catch(e){}
+  all.unshift(rec);
+  try{ localStorage.setItem('swc-sites-v1', JSON.stringify(all)); }catch(e){}
+  updateLock();
+  showPricingPrompt(rec);
+}
+el('lockBtn').onclick = doLockIn;
+el('lockBtn2').onclick = doLockIn;
+
+/* PRICING PROMPT — after lock-in. Opt-in only. We never touch money. */
+function showPricingPrompt(rec){
+  var m = el('priceModal');
+  var body = '', btns = '';
+  if(rec.hasStore){
+    body = '<p>Selling is already on <b>'+escH(rec.name)+'</b>. Next step, on <b>your own</b> website:</p>' +
+      '<ol><li>Download your files and open your site.</li>' +
+      '<li>Click <b>\uD83D\uDD27 Manager</b> and unlock it with your master password.</li>' +
+      '<li>Set your prices and paste <b>your own</b> payment links (from your own Stripe or other provider account).</li>' +
+      '<li>Flip checkout ON. Buyers pay your provider directly.</li></ol>';
+    btns = '<button class="btn" id="pmOk">Got it!</button> ' +
+      '<a class="btn ghost" href="sites.html">See My Websites</a>';
+  } else {
+    body = '<p>Want to <b>sell things</b> on <b>'+escH(rec.name)+'</b>? ' +
+      'You can set prices and retail info on your own website with <b>your own</b> payment provider ' +
+      '(for example, your own Stripe account &mdash; you connect it yourself in your site\u2019s Manager settings).</p>' +
+      '<p class="dim">It\u2019s entirely your choice &mdash; your site works fine without it.</p>';
+    btns = '<button class="btn" id="pmYes">Yes, add selling</button> ' +
+      '<button class="btn ghost" id="pmNo">Not now</button>';
+  }
+  el('pmBody').innerHTML = body;
+  el('pmBtns').innerHTML = btns;
+  m.classList.add('open');
+  var ok = el('pmOk'); if(ok) ok.onclick = closePm;
+  var no = el('pmNo'); if(no) no.onclick = closePm;
+  var yes = el('pmYes');
+  if(yes) yes.onclick = async function(){
+    /* user opts in: enable store, rebuild, re-save */
+    var t = readTogs('t_'); t.store = true; writeTogs('t_', t);
+    var te = readTogs('e_'); te.store = true; writeTogs('e_', te);
+    await rebuild(false);
+    try{
+      var all = JSON.parse(localStorage.getItem('swc-sites-v1') || '[]');
+      if(all[0] && all[0].id === rec.id){
+        all[0].files = cur.files; all[0].hasStore = true;
+        all[0].picks = cur.picks.map(function(p){ return p.component; });
+        localStorage.setItem('swc-sites-v1', JSON.stringify(all));
+      }
+    }catch(e){}
+    el('pmBody').innerHTML = '<p><b>Selling added!</b> \uD83C\uDF89</p>' +
+      '<p>Your site now has a store section (checkout starts <b>OFF</b>). To finish setup on your own site:</p>' +
+      '<ol><li>Download your files and open your site.</li>' +
+      '<li>Click <b>\uD83D\uDD27 Manager</b>, unlock with your master password.</li>' +
+      '<li>Set prices, paste <b>your own</b> payment links, flip checkout ON.</li></ol>';
+    el('pmBtns').innerHTML = '<button class="btn" id="pmOk2">Got it!</button>';
+    el('pmOk2').onclick = closePm;
+  };
+  function closePm(){ m.classList.remove('open'); }
+  m.onclick = function(e){ if(e.target === m) closePm(); };
+}
+})();
+</script>
+</body>
+</html>
