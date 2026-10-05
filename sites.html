@@ -200,5 +200,99 @@ el('delModal').addEventListener('click', function(e){ if(e.target === el('delMod
 render();
 })();
 </script>
+
+<style>
+/* ============ FIRST-visit WELCOME overlay (2026-10-04 standard: centered modal, no scroll, no spotlight) ============ */
+#jahWelcome,#jahGuide,#jahGuideBtn{--amber:#d4a017;--amber2:#d4a0172}
+#jahGuideBtn{position:fixed;top:14px;right:14px;z-index:99900;min-width:48px;min-height:48px;border-radius:24px;border:1px solid var(--amber,#f5a623);background:var(--panel,#161d27);color:var(--amber2,#ffcf6e);font-weight:700;font-size:18px;padding:10px 16px;cursor:pointer}
+#jahGuideBtn:hover{background:var(--amber,#f5a623);color:#0a0e14}
+#jahWelcome{position:fixed;inset:0;z-index:100000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.75)}
+#jahWelcome.show{display:flex}
+#jahWelcomeCard{background:var(--panel,#161d27);border:2px solid var(--amber,#f5a623);border-radius:14px;padding:22px 20px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.6);color:var(--txt,#e8edf4)}
+#jahWelcomeCard h2{margin:0 0 4px;color:var(--amber2,#ffcf6e);font-size:20px}
+#jahWelcomeCard .wsub{margin:4px 0 0;color:var(--dim,#9aa7ba);font-size:14px}
+#jahWelcomeCard ol{margin:10px 0 0;padding-left:22px;font-size:14px;line-height:1.55}
+#jahWelcomeCard ol li{margin:8px 0}
+#jahWelcomeCard ol li b{color:var(--amber2,#ffcf6e)}
+#jahWelcomeCard .wbtnrow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+#jahGuide .btn,#jahWelcome .btn{min-height:48px;min-width:48px;font-size:15px;padding:12px 22px;border-radius:10px;border:1px solid var(--amber,#f5a623);background:transparent;color:var(--amber2,#ffcf6e);cursor:pointer;font-family:inherit}
+#jahWelcomeOk{font-weight:700;background:var(--amber,#f5a623)!important;color:#0a0e14!important;border:none!important}
+#jahGuide{position:fixed;inset:0;z-index:99900;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.7)}
+#jahGuide.show{display:flex}
+#jahGuideCard{background:var(--panel,#161d27);border:1px solid var(--amber,#f5a623);border-radius:14px;max-width:680px;width:100%;max-height:86vh;overflow:auto;padding:20px 22px;color:var(--txt,#e8edf4)}
+#jahGuideCard h2{margin-top:0;color:var(--amber2,#ffcf6e)}
+#jahGuideCard .gfeat{margin:0 0 14px;padding:10px 12px;background:#10151d;border:1px solid var(--line,#2a3444);border-radius:10px}
+#jahGuideCard .gfeat b{color:var(--amber2,#ffcf6e)}
+#jahGuideCard .gfeat p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--txt,#e8edf4)}
+#jahGuideCard .gfeat p b{color:var(--amber2,#ffcf6e)}
+#jahGuideCard .gfeat ul{margin:4px 0;padding-left:20px}
+#jahGuideCloseRow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+</style>
+<button id="jahGuideBtn" aria-label="Open the site guide" title="How to use this site — every feature, in plain language">?</button>
+<!-- first-visit WELCOME overlay (2026-10-04 standard: centered modal, no scroll, no spotlight) -->
+<div id="jahWelcome" aria-hidden="true">
+  <div id="jahWelcomeCard" role="dialog" aria-modal="true" aria-label="Welcome to Signature Website Creator">
+    <h2>Welcome to Signature Website Creator</h2>
+    <p class="wsub">Describe the website you want &mdash; the AI builds it for real. Then edit, lock in, and make it yours. Here&rsquo;s how:</p>
+    <ol>
+      <li><b>Describe it.</b> Tell the builder what site you want &mdash; pick static, Llama-online, or Llama-offline.</li>
+      <li><b>Edit live.</b> The preview shows your site with edit controls at the bottom &mdash; change anything, then press Done.</li>
+      <li><b>Lock it in.</b> When it looks complete, the Lock In button highlights &mdash; lock it, set your name and a manager password.</li>
+      <li><b>Make it yours.</b> After lock-in: set prices with your own provider, or mirror any site&rsquo;s layout with your own brand.</li>
+    </ol>
+    <div class="wbtnrow">
+      <button class="btn" id="jahWelcomeOk" type="button">OK &mdash; Got it &#10003;</button>
+      <button class="btn" id="jahWelcomeFull" type="button">Full how-to guide</button>
+    </div>
+  </div>
+</div>
+<div id="jahGuide" aria-hidden="true">
+  <div id="jahGuideCard" role="dialog" aria-modal="true" aria-label="How to use Signature Website Creator">
+    <div id="jahGuideCloseRow">
+      <h2 style="margin:0">How to use this site</h2>
+      <button class="btn" id="jahGuideClose" type="button">&#10005; Close</button>
+    </div>
+    <div class="gfeat"><b>&#129516; AI builder</b><p><b>What:</b> the builder page. <b>Does:</b> Describe a website in plain words and the AI builds a real working site. <b>How:</b> Open the builder, describe, pick static / Llama-online / Llama-offline.</p></div>
+    <div class="gfeat"><b>&#9999;&#65039; Live editing</b><p><b>What:</b> the edit controls. <b>Does:</b> Your site previewed live with edit controls pinned at the bottom &mdash; press Done when finished. <b>How:</b> Edit in the preview; Done hands you the highlighted Lock In button.</p></div>
+    <div class="gfeat"><b>&#128274; Lock In</b><p><b>What:</b> the commit step. <b>Does:</b> Locks your site in &mdash; you set your name and a manager/editor master password for full manual control after. <b>How:</b> Press the highlighted Lock In when the site looks complete.</p></div>
+    <div class="gfeat"><b>&#127912; 1 Million Website Options</b><p><b>What:</b> the options catalog. <b>Does:</b> Templates and designs marching to a million, on their own tab. <b>How:</b> The Options tab &mdash; browse and apply.</p></div>
+    <div class="gfeat"><b>&#129726; Mirror a Website</b><p><b>What:</b> the mirror page. <b>Does:</b> Paste any URL &mdash; the tool rebuilds the layout structure with YOUR images, products, and brand. Layout inspiration only &mdash; never the source&rsquo;s trademarks. <b>How:</b> The Mirror tab; paste a URL and apply your brand.</p></div>
+    <div class="gfeat"><b>&#127760; My Websites</b><p><b>What:</b> your sites. <b>Does:</b> Every site you&rsquo;ve built, with edit and delete (in-page confirmations, never popups). <b>How:</b> The My Websites tab.</p></div>
+    <div class="gfeat"><b>&#128179; Your money, your provider</b><p><b>What:</b> pricing and checkout. <b>Does:</b> After lock-in you set prices and retail info on your own site with your own provider &mdash; card checkout is built in but strictly opt-in. <b>How:</b> Follow the post-lock-in prompts; the builder never touches your money.</p></div>
+    <div class="btnrow" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+      <button class="btn" id="jahGuideTour" type="button">&#9654; Show the welcome guide</button>
+      <button class="btn" id="jahGuideClose2" type="button">&#10005; Close guide</button>
+    </div>
+  </div>
+</div>
+<script>(function(){try{
+/* ---------- first-visit WELCOME overlay (2026-10-04 standard): centered modal.
+   NO auto-scroll, NO spotlight, NO section jumps — the page stays put, the overlay teaches. ---------- */
+var FLAG="jah-tour-seen-sitecreator";
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var w=document.getElementById("jahWelcome"),
+    guide=document.getElementById("jahGuide"),
+    guideCard=document.getElementById("jahGuideCard"),
+    guideBtn=document.getElementById("jahGuideBtn");
+function openWelcome(){if(!w)return;w.classList.add("show");w.setAttribute("aria-hidden","false");
+  try{document.getElementById("jahWelcomeOk").focus({preventScroll:true})}catch(e){}}
+function closeWelcome(){if(!w)return;w.classList.remove("show");w.setAttribute("aria-hidden","true");ls(FLAG,"1")}
+document.getElementById("jahWelcomeOk").onclick=closeWelcome;
+document.getElementById("jahWelcomeFull").onclick=function(){closeWelcome();openGuide()};
+w.addEventListener("click",function(e){if(e.target===w)closeWelcome()});
+document.addEventListener("keydown",function(e){
+  if(w.classList.contains("show")&&e.key==="Escape"){closeWelcome();e.preventDefault()}});
+function openGuide(){if(!guide)return;guide.classList.add("show");guide.setAttribute("aria-hidden","false");
+  try{guideCard.scrollTop=0;document.getElementById("jahGuideClose").focus({preventScroll:true})}catch(e){}}
+function closeGuide(){if(!guide)return;guide.classList.remove("show");guide.setAttribute("aria-hidden","true");
+  try{guideBtn.focus({preventScroll:true})}catch(e){}}
+guideBtn.onclick=openWelcome;
+document.getElementById("jahGuideClose").onclick=closeGuide;
+document.getElementById("jahGuideClose2").onclick=closeGuide;
+document.getElementById("jahGuideTour").onclick=function(){closeGuide();openWelcome()};
+guide.addEventListener("click",function(e){if(e.target===guide)closeGuide()});
+var __qs="",__hash="";try{__qs=location.search;__hash=location.hash}catch(e){}
+if(!ls(FLAG)){setTimeout(openWelcome,900)}
+}catch(e){}})();</script>
 </body>
 </html>
