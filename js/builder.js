@@ -127,7 +127,7 @@ function compTabBar(tabs, activeHref) {
   return out + '</nav>';
 }
 
-/* 31-site network nav. currentLabel = "31 ..." text shown as YOU ARE HERE. */
+/* 33-site network nav. currentLabel = "31 ..." text shown as YOU ARE HERE. */
 function compNetworkNav(currentLabel) {
   var S = 'https://justinahiggins614-cmyk.github.io/';
   var sites = [
@@ -135,7 +135,7 @@ function compNetworkNav(currentLabel) {
     ['jah-calculator/', '2 Signature Universal Paradox Immune Calculator'],
     ['jah-dictionary/', '3 The Signature Dictionary'],
     ['jah-wiki/', '4 JAH Wiki'],
-    ['jah-n-wiki-leaks/', '5 JAH-N Wiki'],
+    ['jah-n-wiki-leaks/', '5 JAH-N Wiki Leaks'],
     ['signature-llama/', '6 Signature Llama'],
     ['jah-ai-models/', '7 The Signature AI Phone Book'],
     ['cyber-patent-catalog/', '8 Globally Rejustered Patent Catalog'],
