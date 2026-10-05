@@ -94,6 +94,8 @@ details.more summary{cursor:pointer;color:var(--cyan)}
     <input class="txt" id="fOwner" placeholder="e.g. Jamie Rivera" maxlength="80">
     <label class="f" for="fInfo">About you <span class="dim">(optional)</span></label>
     <input class="txt" id="fInfo" placeholder="e.g. Family bakery since 1998" maxlength="300">
+    <label class="f" for="fEmail">Your contact email <span class="dim">(optional — the site&rsquo;s contact form sends to this)</span></label>
+    <input class="txt" id="fEmail" type="email" placeholder="e.g. you@example.com" maxlength="120" autocomplete="email">
     <label class="f" for="fDesc">What should the website be about? <span class="dim">Use plain words.</span></label>
     <textarea class="txt" id="fDesc" rows="4" placeholder="e.g. a bakery site with menu and photos"></textarea>
     <div class="chips" id="exChips"></div>
@@ -261,6 +263,7 @@ if(reedit){
   el('fName').value = reedit.name || '';
   el('fOwner').value = reedit.ownerName || '';
   el('fInfo').value = reedit.ownerInfo || '';
+  el('fEmail').value = reedit.ownerEmail || '';
   el('fDesc').value = reedit.description || '';
   if(reedit.smartness){
     smart = reedit.smartness;
@@ -301,6 +304,7 @@ function baseOpts(){
     name: el('fName').value.trim(),
     ownerName: el('fOwner').value.trim(),
     ownerInfo: el('fInfo').value.trim(),
+    ownerEmail: el('fEmail').value.trim(),
     description: el('fDesc').value.trim(),
     smartness: smart,
     auto: readTogs('t_'),
@@ -435,6 +439,7 @@ function doLockIn(){
     files: cur.files,
     picks: cur.picks.map(function(p){ return p.component; }),
     opts: { name: curOpts.name, ownerName: curOpts.ownerName, ownerInfo: curOpts.ownerInfo,
+      ownerEmail: curOpts.ownerEmail,
       description: curOpts.description, smartness: curOpts.smartness, auto: curOpts.auto,
       passwordHash: curOpts.passwordHash }
   };

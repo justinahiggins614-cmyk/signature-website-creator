@@ -60,6 +60,7 @@ function buildSite(opts) {
   var auto = opts.auto || {};
   var slug = SF.slugify(name);
   var ownerName = String(opts.ownerName || '').slice(0, 80);
+  var ownerEmail = String(opts.ownerEmail || '').slice(0, 120);
   var ownerInfo = String(opts.ownerInfo || '').slice(0, 300);
   var passwordHash = String(opts.passwordHash || '');
   var tagline = desc.length > 140 ? desc.slice(0, 137) + '\u2026' : desc;
@@ -102,7 +103,7 @@ function buildSite(opts) {
       ? 'You chose AI Llama Online: the page loads the free Signature Llama engine script and answers live. Needs internet.'
       : 'You chose AI Llama Offline: the page looks for the engine in a local sigllama/ folder first (works with no connection) and falls back to the guide until you install the engine files.');
   if (auto.gallery) { main += SF.compGallery(); pick('Photo gallery', 'You turned on "Automate" for the gallery \u2014 six labeled slots you swap with your own photos.'); }
-  if (auto.contact) { main += SF.compContact(name); pick('Contact form (mailto)', 'You turned on "Automate" for contact \u2014 an honest mailto form; it opens the visitor\u2019s email app instead of pretending to send.'); }
+  if (auto.contact) { main += SF.compContact(name, ownerEmail); pick('Contact form (mailto)', 'You turned on "Automate" for contact \u2014 an honest mailto form; it opens the visitor\u2019s email app instead of pretending to send.'); }
   if (auto.store) {
     var products = entries.slice(0, 4).map(function (e) { return { t: e.t, d: e.d }; });
     main += SF.compStore(products, slug);

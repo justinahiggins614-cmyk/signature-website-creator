@@ -161,8 +161,14 @@ grid.addEventListener('click', function(e){
   var i = +b.getAttribute('data-copy');
   var t = String(SF[LIB[i].fn]);
   function done(){ b.textContent = 'Copied!'; setTimeout(function(){ b.textContent = 'Copy code'; }, 1200); }
-  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done, done); }
-  else done();
+  function fallback(){
+    var ta = document.createElement('textarea'); ta.value = t;
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta); done();
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done, fallback); }
+  else fallback();
 });
 
 function readAloud(t){try{speechSynthesis.cancel();}catch(e){}

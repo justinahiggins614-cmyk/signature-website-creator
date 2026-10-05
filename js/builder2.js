@@ -26,7 +26,7 @@ function compArchive(entries, bestIdx, readAloud) {
   for (i = 0; i < entries.length; i++) {
     L = (entries[i].t.charAt(0) || '#').toUpperCase();
     if (!/[A-Z]/.test(L)) L = '#';
-    (letters[L] = letters[L] || []).push(entries[i]);
+    (letters[L] = letters[L] || []).push(i);
   }
   var keys = Object.keys(letters).sort();
   out += '<h3>Browse A\u2013Z (' + entries.length + ')</h3>';
@@ -34,11 +34,41 @@ function compArchive(entries, bestIdx, readAloud) {
     L = keys[i];
     out += '<details class="az"><summary>' + esc(L) + ' (' + letters[L].length + ')</summary><div class="azlist">';
     for (var j = 0; j < letters[L].length; j++) {
-      out += '<a href="#" onclick="return false"><b>' + esc(letters[L][j].t) + '</b><br><span class="dim">' +
-        esc(letters[L][j].d) + '</span></a>';
+      var idx = letters[L][j];
+      out += '<a href="#entryview" onclick="showEntry(' + idx + ');return false"><b>' + esc(entries[idx].t) + '</b><br><span class="dim">' +
+        esc(entries[idx].d) + '</span></a>';
     }
     out += '</div></details>';
   }
+  /* Each archive entry gets its own working detail view: what-it-does,
+     implications, stats, copy/download/audio. copyText/downloadFile/readEl/
+     stopReading come from the page shell's shared helpers. */
+  var adata = JSON.stringify(entries.map(function (e) { return { t: e.t, d: e.d }; })).replace(/</g, '\\u003c');
+  out += '<div class="sec" id="entryview" hidden><div id="evbody">' +
+    '<h2 id="evtitle"></h2><p id="evdesc"></p>' +
+    '<h3>What it does</h3><p id="evwhat"></p>' +
+    '<h3>Implications</h3><p id="evimp"></p>' +
+    '<p class="dim" id="evstat"></p></div>' +
+    '<div class="row">' +
+    '<button class="btn ghost" id="evcopy">\\uD83D\\uDCCB Copy</button>' +
+    '<button class="btn ghost" id="evdl">\\u2B07\\uFE0F Download</button>' +
+    (readAloud ? '<button class="btn ghost" onclick="readEl(\'evbody\')">\\uD83D\\uDD0A Read aloud</button>' : '') +
+    '<button class="btn ghost" onclick="document.getElementById(\'entryview\').hidden=true;try{stopReading()}catch(e){}">Close</button>' +
+    '</div></div>';
+  out += '<script>\\nvar ARCH_ENTRIES=' + adata + ';\\nvar ARCH_I=0;\\n' +
+    'function showEntry(i){ARCH_I=i;var e=ARCH_ENTRIES[i];if(!e)return;\\n' +
+    'var v=document.getElementById("entryview");v.hidden=false;\\n' +
+    'document.getElementById("evtitle").textContent=e.t;\\n' +
+    'document.getElementById("evdesc").textContent=e.d;\\n' +
+    'document.getElementById("evwhat").textContent=e.d;\\n' +
+    'document.getElementById("evimp").textContent="Part of this site\\u2019s archive \\u2014 one of "+ARCH_ENTRIES.length+" entries. Replace it with your real content to make it yours.";\\n' +
+    'document.getElementById("evstat").textContent="Entry "+(i+1)+" of "+ARCH_ENTRIES.length+\\n' +
+    '  "; filed under \\u201C"+(String(e.t).charAt(0)||"#").toUpperCase()+"\\u201D.";\\n' +
+    'try{v.scrollIntoView()}catch(err){}}\\n' +
+    'document.getElementById("evcopy").onclick=function(){var e=ARCH_ENTRIES[ARCH_I];copyText(e.t+"\\n\\n"+e.d,this);};\\n' +
+    'document.getElementById("evdl").onclick=function(){var e=ARCH_ENTRIES[ARCH_I];\\n' +
+    '  downloadFile(String(e.t).replace(/[^a-z0-9]+/gi,"-").toLowerCase()+".txt",e.t+"\\n\\n"+e.d,"text/plain")};\\n' +
+    '</scr' + 'ipt>';
   return out;
 }
 
@@ -140,19 +170,33 @@ function compAiChat(mode, siteName) {
   return '<div class="sec"><h2>\uD83D\uDCAC Ask</h2>' + inner + logic + '</div>';
 }
 
-/* Contact form via mailto — honest, no fake backend. */
-function compContact(siteName) {
+/* Contact form via mailto — honest, no fake backend.
+   email: the owner's own address from the builder. If none was given, the
+   button says so plainly instead of mailing a placeholder. */
+function compContact(siteName, email) {
+  var em = String(email || '').trim();
+  var ok = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(em);
+  var emJs = ok ? em.replace(/['"\\]/g, '') : '';
+  var btn, script;
+  if (ok) {
+    btn = '<button class="btn" onclick="sendMail()">Send via email</button>';
+    script = '<script>\nfunction sendMail(){var n=document.getElementById("cname").value;' +
+      'var m=document.getElementById("cmsg").value;' +
+      'if(!m.trim()){alert("Please write a message first.");return;}' +
+      'location.href="mailto:' + emJs + '?subject="+encodeURIComponent("Message for ' +
+      esc(siteName).replace(/"/g, '') + ' from "+n)+' +
+      '"&body="+encodeURIComponent(m);}\n</script>';
+  } else {
+    btn = '<button class="btn" onclick="noMail()">Send via email</button>' +
+      '<p class="dim">\u26A0\uFE0F No contact email was set for this site yet \u2014 add your email in the builder and rebuild.</p>';
+    script = '<script>\nfunction noMail(){alert("This site has no contact email set yet. ' +
+      'The owner can add one in the Builder (Step 1) and rebuild.");}\n</script>';
+  }
   return '<div class="sec"><h2>\u2709\uFE0F Contact</h2>' +
     '<p class="dim">This form opens your email app \u2014 nothing is sent until you press Send there.</p>' +
     '<input class="txt" id="cname" placeholder="Your name" aria-label="Your name"><br><br>' +
     '<textarea class="txt" id="cmsg" rows="4" placeholder="Your message\u2026" aria-label="Your message"></textarea><br><br>' +
-    '<button class="btn" onclick="sendMail()">Send via email</button>' +
-    '<script>\nfunction sendMail(){var n=document.getElementById("cname").value;' +
-    'var m=document.getElementById("cmsg").value;' +
-    'if(!m.trim()){alert("Please write a message first.");return;}' +
-    'location.href="mailto:hello@example.com?subject="+encodeURIComponent("Message for ' +
-    esc(siteName).replace(/"/g, '') + ' from "+n)+' +
-    '"&body="+encodeURIComponent(m);}\n</script></div>';
+    btn + script + '</div>';
 }
 
 /* Gallery with labeled placeholder slots the owner fills in. */
