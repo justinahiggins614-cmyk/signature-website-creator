@@ -48,6 +48,9 @@ footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
 .spin{display:inline-block;width:18px;height:18px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:sp 1s linear infinite;vertical-align:middle}
 @keyframes sp{to{transform:rotate(360deg)}}
 </style>
+<script src="js/signin.js"></script>
+<script>/* JAHProfile storage wrapper (JAHPS): public visitors pass keys through unprefixed (behavior unchanged); signed-in profiles get per-profile namespaced storage. */
+var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.store?JAHProfile.store:localStorage;}catch(e){return localStorage;}}();</script>
 </head>
 <body>
 <div class="hero">
@@ -305,14 +308,14 @@ el('mBuild').onclick = function(){
   el('mResult').scrollIntoView();
   /* save to My Websites */
   try{
-    var all = JSON.parse(localStorage.getItem('swc-sites-v1') || '[]');
+    var all = JSON.parse(JAHPS.get('swc-sites-v1') || '[]');
     var mo = { brand: brand, tagline: el('mTag').value.trim(), heroImg: heroDataURL,
       blueprint: blueprint, products: products };
     all.unshift({ id:'swc'+Date.now(), name:curMirror.name, slug:curMirror.slug, ts:Date.now(),
       smartness:'static', smartLabel:'Mirror page (static)', ownerName:'', hasStore:false,
       mirror:true, source:curMirror.source, files:curMirror.files,
       picks:curMirror.picks.map(function(p){ return p.component; }), mirrorOpts: mo });
-    localStorage.setItem('swc-sites-v1', JSON.stringify(all));
+    JAHPS.set('swc-sites-v1', JSON.stringify(all));
   }catch(e){}
 };
 el('mDl').addEventListener('click', function(e){
@@ -395,7 +398,7 @@ el('mDl').addEventListener('click', function(e){
 /* ---------- first-visit WELCOME overlay (2026-10-04 standard): centered modal.
    NO auto-scroll, NO spotlight, NO section jumps — the page stays put, the overlay teaches. ---------- */
 var FLAG="jah-tour-seen-sitecreator";
-function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function ls(k,v){try{if(v===undefined)return JAHPS.get(k);JAHPS.set(k,v)}catch(e){return null}}
 var w=document.getElementById("jahWelcome"),
     guide=document.getElementById("jahGuide"),
     guideCard=document.getElementById("jahGuideCard"),
@@ -420,5 +423,16 @@ guide.addEventListener("click",function(e){if(e.target===guide)closeGuide()});
 var __qs="",__hash="";try{__qs=location.search;__hash=location.hash}catch(e){}
 if(!ls(FLAG)){setTimeout(openWelcome,900)}
 }catch(e){}})();</script>
+<script>
+(function () {
+  /* JAHProfile sign-in — mount the header button. signin.js is already loaded in <head>. */
+  var mount = document.querySelector('header .booksearch') ||
+              document.querySelector('nav.jtabbar') ||
+              document.querySelector('header nav') ||
+              document.querySelector('header') ||
+              document.body;
+  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);
+})();
+</script>
 </body>
 </html>

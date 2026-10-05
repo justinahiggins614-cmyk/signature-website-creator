@@ -63,6 +63,9 @@ footer{padding:18px;text-align:center;color:var(--dim);font-size:.85em}
 details.more{margin-top:8px}
 details.more summary{cursor:pointer;color:var(--cyan)}
 </style>
+<script src="js/signin.js"></script>
+<script>/* JAHProfile storage wrapper (JAHPS): public visitors pass keys through unprefixed (behavior unchanged); signed-in profiles get per-profile namespaced storage. */
+var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.store?JAHProfile.store:localStorage;}catch(e){return localStorage;}}();</script>
 </head>
 <body>
 <div class="hero">
@@ -444,9 +447,9 @@ function doLockIn(){
       passwordHash: curOpts.passwordHash }
   };
   var all = [];
-  try{ all = JSON.parse(localStorage.getItem('swc-sites-v1') || '[]'); }catch(e){}
+  try{ all = JSON.parse(JAHPS.get('swc-sites-v1') || '[]'); }catch(e){}
   all.unshift(rec);
-  try{ localStorage.setItem('swc-sites-v1', JSON.stringify(all)); }catch(e){}
+  try{ JAHPS.set('swc-sites-v1', JSON.stringify(all)); }catch(e){}
   updateLock();
   showPricingPrompt(rec);
 }
@@ -483,11 +486,11 @@ function showPricingPrompt(rec){
     var te = readTogs('e_'); te.store = true; writeTogs('e_', te);
     await rebuild(false);
     try{
-      var all = JSON.parse(localStorage.getItem('swc-sites-v1') || '[]');
+      var all = JSON.parse(JAHPS.get('swc-sites-v1') || '[]');
       if(all[0] && all[0].id === rec.id){
         all[0].files = cur.files; all[0].hasStore = true;
         all[0].picks = cur.picks.map(function(p){ return p.component; });
-        localStorage.setItem('swc-sites-v1', JSON.stringify(all));
+        JAHPS.set('swc-sites-v1', JSON.stringify(all));
       }
     }catch(e){}
     el('pmBody').innerHTML = '<p><b>Selling added!</b> \uD83C\uDF89</p>' +
@@ -572,7 +575,7 @@ function showPricingPrompt(rec){
 /* ---------- first-visit WELCOME overlay (2026-10-04 standard): centered modal.
    NO auto-scroll, NO spotlight, NO section jumps — the page stays put, the overlay teaches. ---------- */
 var FLAG="jah-tour-seen-sitecreator";
-function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function ls(k,v){try{if(v===undefined)return JAHPS.get(k);JAHPS.set(k,v)}catch(e){return null}}
 var w=document.getElementById("jahWelcome"),
     guide=document.getElementById("jahGuide"),
     guideCard=document.getElementById("jahGuideCard"),
@@ -597,5 +600,16 @@ guide.addEventListener("click",function(e){if(e.target===guide)closeGuide()});
 var __qs="",__hash="";try{__qs=location.search;__hash=location.hash}catch(e){}
 if(!ls(FLAG)){setTimeout(openWelcome,900)}
 }catch(e){}})();</script>
+<script>
+(function () {
+  /* JAHProfile sign-in — mount the header button. signin.js is already loaded in <head>. */
+  var mount = document.querySelector('header .booksearch') ||
+              document.querySelector('nav.jtabbar') ||
+              document.querySelector('header nav') ||
+              document.querySelector('header') ||
+              document.body;
+  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);
+})();
+</script>
 </body>
 </html>
