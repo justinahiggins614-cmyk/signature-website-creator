@@ -161,7 +161,9 @@ function compNetworkNav(currentLabel) {
     ['signature-earth/', '28 Signature Earth'],
     ['signature-flight-school/', '29 The Signature Flight School'],
     ['signature-game-store/', '30 The Signature Game Store'],
-    ['signature-website-creator/', '31 Signature Website Creator']
+    ['signature-website-creator/', '31 Signature Website Creator'],
+    ['signature-antivirus/', '32 The Signature Antivirus'],
+    ['signature-os-updater/', '33 The Signature OS Updater']
   ];
   var out = '<div class="jahnet"><span class="t">THE JAH NETWORK</span>';
   for (var i = 0; i < sites.length; i++) {
