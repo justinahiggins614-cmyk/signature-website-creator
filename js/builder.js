@@ -163,7 +163,9 @@ function compNetworkNav(currentLabel) {
     ['signature-game-store/', '30 The Signature Game Store'],
     ['signature-website-creator/', '31 Signature Website Creator'],
     ['signature-antivirus/', '32 The Signature Antivirus'],
-    ['signature-os-updater/', '33 The Signature OS Updater']
+    ['signature-os-updater/', '33 The Signature OS Updater'],
+    ['signature-space-mapping/', '34 Signature Space Mapping'],
+    ['signature-cookbook/', '35 The Signature Cookbook']
   ];
   var out = '<div class="jahnet"><span class="t">THE JAH NETWORK</span>';
   for (var i = 0; i < sites.length; i++) {
