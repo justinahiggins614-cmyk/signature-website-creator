@@ -466,10 +466,8 @@ function showPricingPrompt(rec){
     btns = '<button class="btn" id="pmOk">Got it!</button> ' +
       '<a class="btn ghost" href="sites.html">See My Websites</a>';
   } else {
-    body = '<p>Want to <b>sell things</b> on <b>'+escH(rec.name)+'</b>? ' +
-      'You can set prices and retail info on your own website with <b>your own</b> payment provider ' +
-      '(for example, your own Stripe account &mdash; you connect it yourself in your site\u2019s Manager settings).</p>' +
-      '<p class="dim">It\u2019s entirely your choice &mdash; your site works fine without it.</p>';
+    body = '<p>Want to <b>sell things</b> on <b>'+escH(rec.name)+'</b>? You can add a store and set your own prices and retail info \u2014 checkout stays off until <b>you</b> connect your own payment provider in your site\u2019s Manager settings.</p>' +
+      '<p class="dim">Entirely your choice &mdash; your site works fine without it.</p>';
     btns = '<button class="btn" id="pmYes">Yes, add selling</button> ' +
       '<button class="btn ghost" id="pmNo">Not now</button>';
   }
