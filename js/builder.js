@@ -175,18 +175,31 @@ function compNetworkNav(currentLabel) {
   return out;
 }
 
-/* Read-aloud: one global controller, cancel-first, graceful fallback. */
+/* Read-aloud: Audio-only tiered (ResponsiveVoice -> Google TTS x2). No speechSynthesis:
+   it is silent/missing in Facebook WebView + Android in-app browsers. */
 var READ_ALOUD_JS = [
-  'var __reader=null;',
+  'var __jahAud=null;',
   'function jahToast(m){var t=document.getElementById("jah-toast");if(!t){t=document.createElement("div");t.id="jah-toast";t.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2940;color:#fff;padding:12px 20px;border-radius:10px;z-index:99999;max-width:90vw;display:none";document.body.appendChild(t)}t.textContent=String(m);t.style.display="block";clearTimeout(t._x);t._x=setTimeout(function(){t.style.display="none"},2800)}',
+  'function jahStopAud(){try{if(__jahAud){__jahAud.pause();__jahAud=null;}}catch(e){}}',
+  'var JAHTTS_TIERS=[',
+  ' function(t){return "https://code.responsivevoice.org/getvoice.php?t="+encodeURIComponent(t)+"&tl=en-US&sv=g2&vn=&pitch=0.5&rate=0.95";},',
+  ' function(t){return "https://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob";},',
+  ' function(t){return "https://translate.googleapis.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob";}];',
   'function readAloud(text){',
-  '  try{ speechSynthesis.cancel(); }catch(e){}',
-  '  if(!("speechSynthesis" in window)){ jahToast("Read-aloud is not supported in this browser."); return; }',
-  '  var u=new SpeechSynthesisUtterance(String(text).slice(0,4000));',
-  '  u.rate=1; u.pitch=1;',
-  '  try{ speechSynthesis.speak(u); }catch(e){ jahToast("Could not start reading."); }',
+  '  jahStopAud();',
+  '  var chunks=String(text).replace(/\\s+/g," ").trim().match(/.{1,170}(?=\\s|$)/g)||[String(text)],ci=0;',
+  '  (function playTier(ti){',
+  '    if(ti>=JAHTTS_TIERS.length){jahToast("Read-aloud voice not reachable \\u2014 check connection or try Chrome.");return;}',
+  '    if(ci>=chunks.length)return;',
+  '    try{',
+  '      var a=new Audio(JAHTTS_TIERS[ti](chunks[ci].slice(0,200)));__jahAud=a;',
+  '      a.onended=function(){ci++;playTier(0);};',
+  '      a.onerror=function(){playTier(ti+1);};',
+  '      var p=a.play();if(p&&p.catch)p.catch(function(){playTier(ti+1);});',
+  '    }catch(e){playTier(ti+1);}',
+  '  })(0);',
   '}',
-  'function stopReading(){ try{ speechSynthesis.cancel(); }catch(e){} }',
+  'function stopReading(){ jahStopAud(); }',
   'function readEl(id){ var el=document.getElementById(id); if(el) readAloud(el.innerText||el.textContent); }'
 ].join('\n');
 

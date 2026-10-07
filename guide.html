@@ -42,7 +42,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 </head>
 <body>
 <div class="hero">
-  <p class="kicker">SITE 31 OF 35 &middot; THE JAH NETWORK</p>
+  <p class="kicker">SITE 29 OF 37 &middot; THE JAH NETWORK</p>
   <h1>&#128214; Guide</h1>
   <p class="dim">How the Creator works, what it's built from, and honest answers.</p>
 </div>
@@ -98,7 +98,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 
 </div>
 
-<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+<footer>The Signature Website Creator &middot; Site 29 of the JAH Network &middot; Free forever</footer>
 
 <script src="js/builder.js"></script>
 <script src="js/builder2.js"></script>
@@ -173,10 +173,30 @@ grid.addEventListener('click', function(e){
   else fallback();
 });
 
-function readAloud(t){try{speechSynthesis.cancel();}catch(e){}
-if(!("speechSynthesis" in window)){alert("Read-aloud is not supported in this browser.");return;}
-try{speechSynthesis.speak(new SpeechSynthesisUtterance(String(t).slice(0,4000)));}catch(e){}}
-function stopReading(){try{speechSynthesis.cancel();}catch(e){}}
+/* Audio-only tiered read-aloud (ResponsiveVoice -> Google TTS x2). No speechSynthesis
+   and no native alert(): both are broken/suppressed in Facebook's in-app browser. */
+var __jahAud=null;
+function jahToast(m){var t=document.getElementById('jah-toast');if(!t){t=document.createElement('div');t.id='jah-toast';t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111a2e;color:#fff;padding:12px 20px;border-radius:10px;border:1px solid #d4a017;z-index:99999;max-width:90vw;display:none;font-size:.95em';document.body.appendChild(t);}t.textContent=String(m);t.style.display='block';clearTimeout(t._x);t._x=setTimeout(function(){t.style.display='none'},3200);}
+function jahStopAud(){try{if(__jahAud){__jahAud.pause();__jahAud=null;}}catch(e){}}
+var JAHTTS_TIERS=[
+ function(t){return "https://code.responsivevoice.org/getvoice.php?t="+encodeURIComponent(t)+"&tl=en-US&sv=g2&vn=&pitch=0.5&rate=0.95";},
+ function(t){return "https://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob";},
+ function(t){return "https://translate.googleapis.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob";}];
+function readAloud(t){
+  jahStopAud();
+  var chunks=String(t).replace(/\s+/g," ").trim().match(/.{1,170}(?=\s|$)/g)||[String(t)],ci=0;
+  (function playTier(ti){
+    if(ti>=JAHTTS_TIERS.length){jahToast("Read-aloud voice not reachable — check connection or try Chrome.");return;}
+    if(ci>=chunks.length)return;
+    try{
+      var a=new Audio(JAHTTS_TIERS[ti](chunks[ci].slice(0,200)));__jahAud=a;
+      a.onended=function(){ci++;playTier(0);};
+      a.onerror=function(){playTier(ti+1);};
+      var p=a.play();if(p&&p.catch)p.catch(function(){playTier(ti+1);});
+    }catch(e){playTier(ti+1);}
+  })(0);
+}
+function stopReading(){jahStopAud();}
 function readEl(id){var n=document.getElementById(id);if(n)readAloud(n.innerText||n.textContent);}
 window.readEl = readEl; window.stopReading = stopReading;
 })();

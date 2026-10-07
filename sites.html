@@ -49,7 +49,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 </head>
 <body>
 <div class="hero">
-  <p class="kicker">SITE 31 OF 35 &middot; THE JAH NETWORK</p>
+  <p class="kicker">SITE 29 OF 37 &middot; THE JAH NETWORK</p>
   <h1>&#128449; My Websites</h1>
   <p class="dim">Every site you've built lives here, on your device. Nothing leaves your browser.</p>
 </div>
@@ -67,6 +67,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
   <div class="sec">
     <p class="dim" style="margin:0">Sites are saved in this browser's local storage when you <b>Lock In</b> a build. Download the files to put a site online anywhere.</p>
     <p><a class="btn" href="builder.html">Build a new site</a> <a class="btn ghost" href="mirror.html">&#12978; Mirror a site</a></p>
+    <p id="saveErr" class="dim" role="alert" style="display:none;color:#ff9d9d"></p>
   </div>
   <div id="archive"></div>
 </div>
@@ -87,7 +88,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
   </div>
 </div>
 
-<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+<footer>The Signature Website Creator &middot; Site 29 of the JAH Network &middot; Free forever</footer>
 
 <script>
 (function(){
@@ -95,7 +96,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 function el(id){ return document.getElementById(id); }
 function escH(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 function load(){ try{ return JSON.parse(JAHPS.get('swc-sites-v1')||'[]'); }catch(e){ return []; } }
-function save(a){ try{ JAHPS.set('swc-sites-v1', JSON.stringify(a)); }catch(e){ alert('Storage is full \u2014 delete an old site first.'); } }
+function save(a){ try{ JAHPS.set('swc-sites-v1', JSON.stringify(a)); }catch(e){ var m=el('saveErr'); if(m){ m.textContent='Storage is full \u2014 delete an old site first.'; m.style.display='block'; } } }
 function fmtDate(ts){ try{ return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }catch(e){ return ''; } }
 
 var sites = load();

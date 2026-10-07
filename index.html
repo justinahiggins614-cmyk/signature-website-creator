@@ -41,7 +41,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 <body>
 <img class="heroimg" src="assets/hero.jpg" alt="An AI architect robot building glowing websites">
 <div class="hero">
-  <p class="kicker">SITE 31 OF 35 &middot; THE JAH NETWORK</p>
+  <p class="kicker">SITE 29 OF 37 &middot; THE JAH NETWORK</p>
   <h1>The Signature Website Creator</h1>
   <p>An AI website builder, like me, that builds <b>real websites</b> &mdash; on real pages you can preview, download, and put online. Free, forever.</p>
 </div>
@@ -95,13 +95,33 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 
 </div>
 
-<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+<footer>The Signature Website Creator &middot; Site 29 of the JAH Network &middot; Free forever</footer>
 
 <script>
-function readAloud(t){try{speechSynthesis.cancel();}catch(e){}
-if(!("speechSynthesis" in window)){alert("Read-aloud is not supported in this browser.");return;}
-try{speechSynthesis.speak(new SpeechSynthesisUtterance(String(t).slice(0,4000)));}catch(e){alert("Could not start reading.");}}
-function stopReading(){try{speechSynthesis.cancel();}catch(e){}}
+/* Audio-only tiered read-aloud (ResponsiveVoice -> Google TTS x2). No speechSynthesis
+   and no native alert(): both are broken/suppressed in Facebook's in-app browser. */
+var __jahAud=null;
+function jahToast(m){var t=document.getElementById('jah-toast');if(!t){t=document.createElement('div');t.id='jah-toast';t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111a2e;color:#fff;padding:12px 20px;border-radius:10px;border:1px solid #d4a017;z-index:99999;max-width:90vw;display:none;font-size:.95em';document.body.appendChild(t);}t.textContent=String(m);t.style.display='block';clearTimeout(t._x);t._x=setTimeout(function(){t.style.display='none'},3200);}
+function jahStopAud(){try{if(__jahAud){__jahAud.pause();__jahAud=null;}}catch(e){}}
+var JAHTTS_TIERS=[
+ function(t){return "https://code.responsivevoice.org/getvoice.php?t="+encodeURIComponent(t)+"&tl=en-US&sv=g2&vn=&pitch=0.5&rate=0.95";},
+ function(t){return "https://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob";},
+ function(t){return "https://translate.googleapis.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob";}];
+function readAloud(t){
+  jahStopAud();
+  var chunks=String(t).replace(/\s+/g," ").trim().match(/.{1,170}(?=\s|$)/g)||[String(t)],ci=0;
+  (function playTier(ti){
+    if(ti>=JAHTTS_TIERS.length){jahToast("Read-aloud voice not reachable — check connection or try Chrome.");return;}
+    if(ci>=chunks.length)return;
+    try{
+      var a=new Audio(JAHTTS_TIERS[ti](chunks[ci].slice(0,200)));__jahAud=a;
+      a.onended=function(){ci++;playTier(0);};
+      a.onerror=function(){playTier(ti+1);};
+      var p=a.play();if(p&&p.catch)p.catch(function(){playTier(ti+1);});
+    }catch(e){playTier(ti+1);}
+  })(0);
+}
+function stopReading(){jahStopAud();}
 function readEl(id){var el=document.getElementById(id);if(el)readAloud(el.innerText||el.textContent);}
 </script>
 
@@ -256,6 +276,6 @@ if(!ls(FLAG)){setTimeout(openWelcome,900)}
 <a href="https://justinahiggins614-cmyk.github.io/signature-spell-check/">34 Spell Check</a>
 <a href="https://justinahiggins614-cmyk.github.io/signature-image-grid-measure/">35 Grid Measure</a>
 <a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">36 The Signature Cyber Mega-Mall</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">37 The Signature 3D Print Mega Mall</a><span class="here">31 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
+<a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">37 The Signature 3D Print Mega Mall</a><span class="here">29 The Signature Website Creator &mdash; YOU ARE HERE</span></div>
 </body>
 </html>

@@ -54,7 +54,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 </head>
 <body>
 <div class="hero">
-  <p class="kicker">SITE 31 OF 35 &middot; THE JAH NETWORK</p>
+  <p class="kicker">SITE 29 OF 37 &middot; THE JAH NETWORK</p>
   <h1>&#12978; Mirror a Website</h1>
   <p class="dim">Love how a website is laid out? We rebuild that <b>layout style</b> for you &mdash; with <b>your</b> brand, <b>your</b> products, <b>your</b> images, <b>your</b> words.</p>
 </div>
@@ -110,6 +110,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
     <label class="f" for="mHero">Banner image <span class="dim">(your own picture &mdash; optional)</span></label>
     <input type="file" id="mHero" accept="image/*">
     <img id="mHeroPrev" style="max-width:200px;border-radius:8px;display:none;margin-top:6px" alt="Banner preview">
+    <p id="mImgErr" class="dim" role="alert" style="display:none;color:#ff9d9d"></p>
     <h3>Your products</h3>
     <p class="dim">Add each product with YOUR name, YOUR description, YOUR photo.</p>
     <div id="prodList"></div>
@@ -135,7 +136,7 @@ var JAHPS=function(){try{return (typeof JAHProfile!=="undefined")&&JAHProfile.st
 
 </div>
 
-<footer>The Signature Website Creator &middot; Site 31 of the JAH Network &middot; Free forever</footer>
+<footer>The Signature Website Creator &middot; Site 29 of the JAH Network &middot; Free forever</footer>
 
 <script src="js/builder.js"></script>
 <script src="js/builder2.js"></script>
@@ -217,11 +218,12 @@ function fileToDataURL(file){
     img.src = url;
   });
 }
+function imgErr(m){var e=el('mImgErr');if(e){e.textContent=m;e.style.display='block';clearTimeout(e._x);e._x=setTimeout(function(){e.style.display='none';},4000);}}
 el('mHero').addEventListener('change', async function(){
   try{
     heroDataURL = await fileToDataURL(this.files[0]);
     el('mHeroPrev').src = heroDataURL; el('mHeroPrev').style.display = 'block';
-  }catch(e){ alert('That image could not be read. Try a JPG or PNG.'); }
+  }catch(e){ imgErr('That image could not be read. Try a JPG or PNG.'); }
 });
 
 /* ---- products ---- */
@@ -243,7 +245,7 @@ function addProductRow(){
       var du = await fileToDataURL(this.files[0]);
       prodImgs[i] = du;
       var pv = d.querySelector('[data-pv]'); pv.src = du; pv.style.display = 'block';
-    }catch(e){ alert('That image could not be read. Try a JPG or PNG.'); }
+    }catch(e){ imgErr('That image could not be read. Try a JPG or PNG.'); }
   });
   d.querySelector('[data-rm]').onclick = function(){ delete prodImgs[i]; d.remove(); renumber(); };
 }
@@ -304,7 +306,7 @@ el('mBuild').onclick = function(){
   }).join('');
   el('mResult').style.display = 'block';
   el('mBuildMsg').textContent = '';
-  el('mResult').scrollIntoView();
+  try{ el('mResult').scrollIntoView(); }catch(e){}
   /* save to My Websites */
   try{
     var all = JSON.parse(JAHPS.get('swc-sites-v1') || '[]');
