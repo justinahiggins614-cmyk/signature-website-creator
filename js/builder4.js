@@ -105,7 +105,7 @@ function compStore(products, slug) {
     'never holds, routes, or processes funds and never stores card details.</p>' +
     '<div class="storegrid">' + cards + '</div>' +
     '<p class="dim" id="storeNote"></p></div>' +
-    '<script>\n' +
+    '<script>\nfunction jahToast(m){var t=document.getElementById("jah-toast");if(!t){t=document.createElement("div");t.id="jah-toast";t.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2940;color:#fff;padding:12px 20px;border-radius:10px;z-index:99999;max-width:90vw;display:none";document.body.appendChild(t)}t.textContent=String(m);t.style.display="block";clearTimeout(t._x);t._x=setTimeout(function(){t.style.display="none"},2800)}\n' +
     'var STORE_PRODUCTS=' + pdata + ';\n' +
     'var STORE_KEY="swc-store-' + slug.replace(/"/g, '') + '";\n' +
     'function storeCfg(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY))||{}; }catch(e){ return {}; } }\n' +
@@ -117,7 +117,7 @@ function compStore(products, slug) {
     'document.addEventListener("click",function(e){ var b=e.target.closest?e.target.closest("[data-buy]"):null; if(!b)return;' +
     '  var i=+b.getAttribute("data-buy"); var c=storeCfg();' +
     '  if(c.enabled&&c.links&&c.links[i]){ window.open(c.links[i],"_blank","noopener"); }' +
-    '  else{ alert("Checkout is not set up yet. The site owner connects their own payment provider in Manager settings."); } });\n' +
+    '  else{ jahToast("Checkout is not set up yet. The site owner connects their own payment provider in Manager settings."); } });\n' +
     'paintStore();\n</script>' +
     '<style>.storegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}' +
     '.product{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px}' +
@@ -146,16 +146,16 @@ function compManager(passwordHash, slug, hasStore) {
     '<button class="btn ghost" id="mLock">Lock</button></p>' +
     '<p class="dim">Plain talk: payments are between you and YOUR payment provider. ' +
     'The Signature Website Creator keeps no financial data and processes no payments.</p></div>' +
-    '<script>\n' + hashLine + '\n' +
+    '<script>\nfunction jahToast(m){var t=document.getElementById("jah-toast");if(!t){t=document.createElement("div");t.id="jah-toast";t.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2940;color:#fff;padding:12px 20px;border-radius:10px;z-index:99999;max-width:90vw;display:none";document.body.appendChild(t)}t.textContent=String(m);t.style.display="block";clearTimeout(t._x);t._x=setTimeout(function(){t.style.display="none"},2800)}\n' + hashLine + '\n' +
     'var MSTORE_KEY="swc-store-' + slug.replace(/"/g, '') + '";\n' +
     'async function sha256hex(s){ var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));' +
     ' return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0");}).join(""); }\n' +
     'function mCfg(){ try{ return JSON.parse(localStorage.getItem(MSTORE_KEY))||{}; }catch(e){ return {}; } }\n' +
     'document.getElementById("mgrBtn").onclick=async function(){' +
-    '  if(!MANAGER_HASH){ alert("No manager password was set for this site."); return; }' +
+    '  if(!MANAGER_HASH){ jahToast("No manager password was set for this site."); return; }' +
     '  var pw=prompt("Manager password:"); if(pw==null) return;' +
     '  var h=await sha256hex(pw);' +
-    '  if(h!==MANAGER_HASH){ alert("Wrong password."); return; }' +
+    '  if(h!==MANAGER_HASH){ jahToast("Wrong password."); return; }' +
     '  var p=document.getElementById("mgrPanel"); p.style.display="block";' +
     '  var c=mCfg(); var en=document.getElementById("mEnable"); if(en) en.checked=!!c.enabled;' +
     '  var box=document.getElementById("mLinks");' +
@@ -169,18 +169,18 @@ function compManager(passwordHash, slug, hasStore) {
     'document.getElementById("mEdit").onclick=function(){ _editing=true;' +
     '  document.querySelectorAll("#intro,.sec").forEach(function(s){ s.setAttribute("contenteditable","true"); s.style.outline="2px dashed var(--gold)"; });' +
     '  document.getElementById("mDone").style.display="inline-block"; this.style.display="none";' +
-    '  alert("Editing ON: click any text and type. Press Done editing when finished."); };\n' +
+    '  jahToast("Editing ON: click any text and type. Press Done editing when finished."); };\n' +
     'document.getElementById("mDone").onclick=function(){ _editing=false;' +
     '  document.querySelectorAll("[contenteditable]").forEach(function(s){ s.removeAttribute("contenteditable"); s.style.outline=""; });' +
     '  this.style.display="none"; document.getElementById("mEdit").style.display="inline-block";' +
     '  try{ localStorage.setItem("swc-edits-' + slug.replace(/"/g, '') + '",document.getElementById("intro").innerHTML); }catch(e){}' +
-    '  alert("Edits saved in this browser."); };\n' +
+    '  jahToast("Edits saved in this browser."); };\n' +
     'document.getElementById("mSave").onclick=function(){ var c=mCfg();' +
     '  var en=document.getElementById("mEnable"); if(en) c.enabled=en.checked;' +
     '  c.links=c.links||{};' +
     '  document.querySelectorAll("[data-link]").forEach(function(inp){ c.links[inp.getAttribute("data-link")]=inp.value.trim(); });' +
     '  try{ localStorage.setItem(MSTORE_KEY,JSON.stringify(c)); }catch(e){}' +
-    '  if(window.paintStore) paintStore(); alert("Settings saved."); };\n' +
+    '  if(window.paintStore) paintStore(); jahToast("Settings saved."); };\n' +
     'document.getElementById("mLock").onclick=function(){ document.getElementById("mgrPanel").style.display="none"; };\n' +
     '</script>';
 }

@@ -180,16 +180,16 @@ function compContact(siteName, email) {
   var btn, script;
   if (ok) {
     btn = '<button class="btn" onclick="sendMail()">Send via email</button>';
-    script = '<script>\nfunction sendMail(){var n=document.getElementById("cname").value;' +
+    script = '<script>\nfunction jahToast(m){var t=document.getElementById("jah-toast");if(!t){t=document.createElement("div");t.id="jah-toast";t.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2940;color:#fff;padding:12px 20px;border-radius:10px;z-index:99999;max-width:90vw;display:none";document.body.appendChild(t)}t.textContent=String(m);t.style.display="block";clearTimeout(t._x);t._x=setTimeout(function(){t.style.display="none"},2800)}\nfunction sendMail(){var n=document.getElementById("cname").value;' +
       'var m=document.getElementById("cmsg").value;' +
-      'if(!m.trim()){alert("Please write a message first.");return;}' +
+      'if(!m.trim()){jahToast("Please write a message first.");return;}' +
       'location.href="mailto:' + emJs + '?subject="+encodeURIComponent("Message for ' +
       esc(siteName).replace(/"/g, '') + ' from "+n)+' +
       '"&body="+encodeURIComponent(m);}\n</script>';
   } else {
     btn = '<button class="btn" onclick="noMail()">Send via email</button>' +
       '<p class="dim">\u26A0\uFE0F No contact email was set for this site yet \u2014 add your email in the builder and rebuild.</p>';
-    script = '<script>\nfunction noMail(){alert("This site has no contact email set yet. ' +
+    script = '<script>\nfunction jahToast(m){var t=document.getElementById("jah-toast");if(!t){t=document.createElement("div");t.id="jah-toast";t.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2940;color:#fff;padding:12px 20px;border-radius:10px;z-index:99999;max-width:90vw;display:none";document.body.appendChild(t)}t.textContent=String(m);t.style.display="block";clearTimeout(t._x);t._x=setTimeout(function(){t.style.display="none"},2800)}\nfunction noMail(){jahToast("This site has no contact email set yet. ' +
       'The owner can add one in the Builder (Step 1) and rebuild.");}\n</script>';
   }
   return '<div class="sec"><h2>\u2709\uFE0F Contact</h2>' +

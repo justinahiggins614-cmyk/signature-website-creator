@@ -178,12 +178,13 @@ function compNetworkNav(currentLabel) {
 /* Read-aloud: one global controller, cancel-first, graceful fallback. */
 var READ_ALOUD_JS = [
   'var __reader=null;',
+  'function jahToast(m){var t=document.getElementById("jah-toast");if(!t){t=document.createElement("div");t.id="jah-toast";t.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2940;color:#fff;padding:12px 20px;border-radius:10px;z-index:99999;max-width:90vw;display:none";document.body.appendChild(t)}t.textContent=String(m);t.style.display="block";clearTimeout(t._x);t._x=setTimeout(function(){t.style.display="none"},2800)}',
   'function readAloud(text){',
   '  try{ speechSynthesis.cancel(); }catch(e){}',
-  '  if(!("speechSynthesis" in window)){ alert("Read-aloud is not supported in this browser."); return; }',
+  '  if(!("speechSynthesis" in window)){ jahToast("Read-aloud is not supported in this browser."); return; }',
   '  var u=new SpeechSynthesisUtterance(String(text).slice(0,4000));',
   '  u.rate=1; u.pitch=1;',
-  '  try{ speechSynthesis.speak(u); }catch(e){ alert("Could not start reading."); }',
+  '  try{ speechSynthesis.speak(u); }catch(e){ jahToast("Could not start reading."); }',
   '}',
   'function stopReading(){ try{ speechSynthesis.cancel(); }catch(e){} }',
   'function readEl(id){ var el=document.getElementById(id); if(el) readAloud(el.innerText||el.textContent); }'
